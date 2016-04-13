@@ -25,11 +25,11 @@
 
 				if($resultado['nombre'] == "admin"){
 
-					header("Location: bodyForAdmin.php");
+					header("Location:bodyForAdmin.php");
 
 
 				}else{
-					header("Location: panel.php");
+					header("Location:panel.php");
 				}
 				
 				
