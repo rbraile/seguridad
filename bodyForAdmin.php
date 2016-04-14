@@ -1,5 +1,5 @@
 <?php 
-	include('validarLogin');
+	include('validarLogin.php');
 ?>
 <html lang="en">
 	<head>
