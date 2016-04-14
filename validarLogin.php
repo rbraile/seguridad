@@ -1,14 +1,12 @@
 <?php
 session_start();
-require_once "modelo/Conexion.php";
+
 require_once "modelo/Usuario.php";
     if(isset($_POST['login'])) {
         $formEmail= $_POST['email'];
-        $FormPassword= $_POST['password'];
-        $db = Database::getInstance();
-        $mysqli = $db->getConnection(); 
+        $FormPassword= $_POST['password']; 
 
-        $user = new Usuario($mysqli);
+        $user = new Usuario();
         $resultado = $user->getUserCredential($formEmail,$FormPassword);
 
         if($resultado) {
