@@ -1,4 +1,3 @@
-
 <!DOCTYPE>
 <html lang="en">
 	<head>
@@ -11,8 +10,7 @@
 	</head>
 	<body>
 		<?php
-
-			session_start();
+			include('validarLogin.php');
 
 			if (isset($_SESSION["activeUser"])){ ?>
 
