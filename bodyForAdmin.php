@@ -23,7 +23,7 @@
 		     			 USUARIOS <span class="caret"></span>
 		     			 	 </a>
 		   					 <ul class="dropdown-menu">
-		   					 	<li><a href="alta_Usuario.php">Alta</a> </li>
+		   					 	<li><a  href="altaUsuario.php">Alta</a> </li>
 		   					 	<li><a href="baja_Usuario.php">Baja</a> </li>
 		   					 	<li><a href="modificacion_Usuario.php">Modificación</a> </li>
 		      
