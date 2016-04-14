@@ -11,7 +11,6 @@
 	<body>
 		<?php
 			include('validarLogin.php');
-			session_start();
 
 			if (isset($_SESSION["activeUser"])){ ?>
 
