@@ -9,36 +9,43 @@
 			$formEmail= $_POST['email'];
 			$FormPassword= $_POST['password'];
 			
-			$pedido= $conexion->query("SELECT * FROM usuario WHERE email='$formEmail' AND contrasenia='$FormPassword' ");
+			$pedido= $conexion->query("SELECT * FROM usuario WHERE email='$formEmail' AND password='$FormPassword' ");
 
-
+			echo '<script>alert($pedido);</script>';
 
 
 			$resultado = mysqli_fetch_array($pedido);
 
-			echo 'hola';//$resultado;
 			
 			if($resultado){
 
 				
 				$_SESSION["activeUser"]= $formEmail;
 
-				if($resultado['nombre'] == "admin"){
+				if($resultado['habilitado'] == 1){
 
-					header("Location:bodyForAdmin.php");
+					if($resultado['nombre'] == "admin"){
 
+						header("Location:bodyForAdmin.php");
+
+
+					}else{
+						header("Location:panel.php");
+					}
 
 				}else{
-					header("Location:panel.php");
+
+					echo '<p>Aún no ha sido habilitado.Intente otro día.</p>';
+					//header("Location: index.php"); "esta comentado para que se vea el texto de respuesta. pero la idea es que redireccione"
 				}
-				
-				
+
 			
 
 			}else{
 
-				echo'<script>alert("No existe registro del usuario ingresado.");</script>';
-				header("Location: index.php");
+				echo'<p>No existe registro del usuario ingresado.</p>';
+
+				//header("Location: index.php");"esta comentado para que se vea el texto de respuesta. pero la idea es que redireccione"
 				/*echo'<script>window.location="index.php";</script>';*/
 			};
 		}
