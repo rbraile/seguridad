@@ -2,7 +2,7 @@
 /*
 * Mysql database class - only one connection alowed
 */
-class Database {
+class Conexion {
     private $_connection;
     private static $_instance; //The single instance
     private $_host = "localhost";
