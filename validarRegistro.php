@@ -1,7 +1,7 @@
 <?php
 
 	
-	include ("conexion.php");
+	require_once "modelo/Conexion.php";
 
 	$succes= false;
 

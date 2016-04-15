@@ -2,24 +2,34 @@
 session_start();
 
 require_once "modelo/Usuario.php";
+
     if(isset($_POST['login'])) {
+
         $formEmail= $_POST['email'];
+
         $FormPassword= $_POST['password']; 
 
         $user = new Usuario();
+
         $resultado = $user->getUserCredential($formEmail,$FormPassword);
 
-			echo '<script>alert($pedido);</script>';
+			
         if($resultado) {
+
             $_SESSION["activeUser"]= $formEmail;
 
 				if($resultado['habilitado'] == 1){
 
             if($resultado['nombre'] == "admin") {
+
                 $_SESSION["userLevel"] = "admin";
+
                 header("Location: bodyForAdmin.php");
+
             } else {
+
                 $_SESSION["userLevel"] = "user";
+                
                 header("Location: panel.php");
             }
 				}else{
