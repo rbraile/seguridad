@@ -30,10 +30,13 @@ class Conexion {
                  E_USER_ERROR);
         }
     }
+
+
     // Magic method clone is empty to prevent duplication of connection
     private function __clone() { }
     // Get mysqli connection
     public function getConnection() {
         return $this->_connection;
     }
+
 }

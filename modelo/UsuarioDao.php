@@ -6,11 +6,11 @@
 require_once "Conexion.php";
 
 
-class Usuario {    
+class UsuarioDao {    
     private $_db;
     private $_mysqli;
 
-    public function Usuario() {
+    public function UsuarioDao() {
         $this->db = Conexion::getInstance();
         $this->mysqli = $this->db->getConnection();
     }
