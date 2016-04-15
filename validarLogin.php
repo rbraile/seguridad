@@ -13,6 +13,7 @@ require_once "modelo/Usuario.php";
 
         $resultado = $user->getUserCredential($formEmail,$FormPassword);
 
+        echo 'seession: '.$_SESSION;
 			
         if($resultado) {
 

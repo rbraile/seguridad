@@ -11,10 +11,13 @@
 	<body>
 		<?php
 			
+			include('validarLogin.php');
 			include('altaUsuario.php');
 
 
-			if (isset($_SESSION["activeUser"])){ ?>
+			if (isset($_SESSION["activeUser"]))
+			{ 
+		?>
 
 				<div class="container">
 					<ul class="nav nav-pills fixed-top">
@@ -25,7 +28,7 @@
 		   					 <ul class="dropdown-menu">
 		   					 	<li><a  href="listarUsuariosHabilitables.php">Alta</a> </li>
 		   					 	<li><a href="baja_Usuario.php">Baja</a> </li>
-		   					 	<li><a href="listarUsuariosModificables.php">Modificación</a> </li>
+		   					 	<li><a href="usuariosModificables.php">Modificación</a> </li>
 		      
 		    				</ul>
 		  				</li>
@@ -54,52 +57,54 @@
 		      			</ul>
 					</ul>
 				</div>
-		<div class="container">
-			<div class="panel panel-default">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading">titulo  de lo que se esta listando (productos o usuarios)</div>
-				   <!-- Table -->
-				   <p>formar la tabla en base a lo que se muestra. datos y cantidad de columnas</p>
-				   <table class="table">
-				   	<tr>
-				  		<td>id</td>
-				  		<td>nombre</td>
-				  		<td>email</td>
-				  		<td>habilitado</td>
-				  		<td>Acción</td>
-				  	</tr>
-				  	<tr>
-					<?php
+				<div class="container">
+					<div class="panel panel-default">
+						  <!-- Default panel contents -->
+						  <div class="panel-heading">titulo  de lo que se esta listando (productos o usuarios)</div>
+						   <!-- Table -->
+						   <p>formar la tabla en base a lo que se muestra. datos y cantidad de columnas</p>
+						   <table class="table">
+						   	<tr>
+						  		<td>id</td>
+						  		<td>nombre</td>
+						  		<td>email</td>
+						  		<td>habilitado</td>
+						  		<td>Acción</td>
+						  	</tr>
+						  	<tr>
+							<?php
 
-						foreach ($listaUsuarios as $usuario) {
-							echo'<tr>';
-							echo'<td> '.$usuario["id"].' </td>';
-							echo'<td> '.$usuario["nombre"].'  </td>';
-							echo'<td> '.$usuario["email"].'  </td>';
-							echo'<td> '.$usuario["habilitado"].'  </td>';
-							echo'<td>' . '<a  class="btn btn-default" href="modificarUsuario.php?ID='.$usuario["id"].'">Modificar</a>'.'</td>';
-							echo'</tr>';
-						}
+								foreach ($listaUsuarios as $usuario) {
+									echo'<tr>';
+									echo'<td> '.$usuario["id"].' </td>';
+									echo'<td> '.$usuario["nombre"].'  </td>';
+									echo'<td> '.$usuario["email"].'  </td>';
+									echo'<td> '.$usuario["habilitado"].'  </td>';
+									echo'<td>' . '<a  class="btn btn-default" href="modificarUsuario.php?ID='.$usuario["id"].'">Modificar</a>'.'</td>';
+									echo'</tr>';
+								}
 
-						
+								
 
-					?>
-					</tr>	   
-				  
-				  	
+							?>
+							</tr>	   
+						  
+						  	
 
-				    
-				  </table>
+						    
+						  </table>
+						</div>
 				</div>
-		</div>
 
 		
 		<?php
 
 				
-			}else{
+			}
+			else
+			{
 
-				//header("Location: index.php");
+				header("Location: index.php");
 			}
 		?>
 		

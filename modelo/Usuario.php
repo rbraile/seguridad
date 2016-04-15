@@ -4,7 +4,7 @@
 */
 
 require_once "modelo/Conexion.php";
-require_once "modificarUsuario.php";
+//require_once "modificarUsuario.php";
 
 
 class Usuario {   
@@ -37,9 +37,9 @@ class Usuario {
         return $pedido;
 
     }
-    public function getUsuarioModificable(){
+    public function getUsuarioModificable($id){
 
-        $sql_query = "SELECT * FROM usuario WHERE  ";
+        $sql_query = "SELECT * FROM usuario WHERE  id_usuario = '$id' ";
 
        $pedido = $this->mysqli->query($sql_query); 
 
@@ -48,7 +48,10 @@ class Usuario {
        return  $userEditable;
 
     }
+    public function setUsuario($id,$formNombre,$formEmail){
 
+        $sql_query = "UPDATE usuario SET nombre='$formNombre', email='$formEmail'  WHERE  id_usuario= '$id' ";
+    }
 
 
 }

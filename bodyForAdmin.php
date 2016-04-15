@@ -11,9 +11,11 @@
 	<body>
 		<?php
 			include('validarLogin.php');
-			include('altaUsuario.php');
+			//include('altaUsuario.php');
 
-			if (isset($_SESSION["activeUser"])){ ?>
+			if (isset($_SESSION["activeUser"]))
+			{ 
+		?>
 
 				<div class="container">
 					<ul class="nav nav-pills fixed-top">
@@ -24,7 +26,7 @@
 		   					 <ul class="dropdown-menu">
 		   					 	<li><a  href="listarUsuariosHabilitables.php">Alta</a> </li>
 		   					 	<li><a href="baja_Usuario.php">Baja</a> </li>
-		   					 	<li><a href="listarUsuariosModificables.php">Modificación</a> </li>
+		   					 	<li><a href="usuariosModificables.php">Modificación</a> </li>
 		      
 		    				</ul>
 		  				</li>
@@ -59,8 +61,9 @@
 		<?php
 
 				
-			}else{
-
+			}
+			else
+			{
 				header("Location: index.php");
 			}
 		?>
