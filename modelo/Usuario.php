@@ -7,12 +7,12 @@ require_once "modelo/Conexion.php";
 //require_once "modificarUsuario.php";
 
 
+class Usuario {   
 
-class UsuarioDao {    
     private $_db;
     private $_mysqli;
 
-    public function UsuarioDao() {
+    public function Usuario() {
 
         $this->db = Conexion::getInstance();
 
@@ -26,12 +26,6 @@ class UsuarioDao {
         $pedido = $this->mysqli->query($sql_query);
 
         return mysqli_fetch_array($pedido);
-    }
-
-    public function updateUsuario($id, $nombre,$email) {
-        $sql_query = "UPDATE usuario SET nombre = '$nombre', email = '$email' WHERE id_usuario = $id";
-        $this->mysqli->query($sql_query);
-        return $this->mysqli->affected_rows;
     }
 
     public function getUserWithoutCredential(){
@@ -52,11 +46,12 @@ class UsuarioDao {
        return  $pedido;
 
     }
-    public function getUserForId($id){
+/*    public function getUserForId($id){
 
-        $sql_query =  "SELECT * FROM usuario WHERE id_usuario= $id ";
+        $sql_query =  "SELECT * FROM usuario WHERE id= '$id' ";
         $pedido = $this->mysqli->query($sql_query); 
-        return mysqli_fetch_array($pedido);
+        return  $pedido;
     }
+*/
 
 }

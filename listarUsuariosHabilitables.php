@@ -11,11 +11,9 @@
 	<body>
 		<?php
 			include('validarLogin.php');
-			//include('altaUsuario.php');
+			include('altaUsuario.php');
 
-			if (isset($_SESSION["activeUser"]))
-			{ 
-		?>
+			if (isset($_SESSION["activeUser"])){ ?>
 
 				<div class="container">
 					<ul class="nav nav-pills fixed-top">
@@ -55,15 +53,51 @@
 		      			</ul>
 					</ul>
 				</div>
-	
+		<div class="container">
+			<div class="panel panel-default">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">titulo  de lo que se esta listando (productos o usuarios)</div>
+				   <!-- Table -->
+				   <p>formar la tabla en base a lo que se muestra. datos y cantidad de columnas</p>
+				   <table class="table">
+				   	<tr>
+				  		<td>id</td>
+				  		<td>nombre</td>
+				  		<td>email</td>
+				  		<td>habilitado</td>
+				  		<td>Acción</td>
+				  	</tr>
+				  	<tr>
+					<?php
+
+						foreach ($listaUsuarios as $usuario) {
+							echo'<tr>';
+							echo'<td> '.$usuario["id"].' </td>';
+							echo'<td> '.$usuario["nombre"].'  </td>';
+							echo'<td> '.$usuario["email"].'  </td>';
+							echo'<td> '.$usuario["habilitado"].'  </td>';
+							echo'<td>' . '<button type="submit" name="login" class="btn btn-default">Aceptar</button>'.'</td>';
+							echo'</tr>';
+						}
+
+						
+
+					?>
+					</tr>	   
+				  
+				  	
+
+				    
+				  </table>
+				</div>
+		</div>
 
 		
 		<?php
 
 				
-			}
-			else
-			{
+			}else{
+
 				header("Location: index.php");
 			}
 		?>

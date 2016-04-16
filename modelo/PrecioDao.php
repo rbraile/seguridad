@@ -17,7 +17,6 @@ class PrecioDao {
         $sql_query = "INSERT INTO precio (id_producto, id_usuario, id_semana, precio, fecha) VALUES 
     ($id_producto,$id_usuario,$id_semana, $valor, NOW())";
         $this->mysqli->query($sql_query);
-        var_dump($sql_query);
         return $this->mysqli->insert_id;
     }
 
