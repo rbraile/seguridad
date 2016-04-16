@@ -3,15 +3,22 @@
 	require_once "modelo/Conexion.php";
 	require_once "modelo/Usuario.php";
 	require_once "usuariosModificables.php";
+	require_once "listarUsuariosModificables.php";
+
+	//
 
 	if( $_SESSION["userLevel"] == "admin"){
 
-
 		$id = $_GET['ID'];
 
-		$user= new  Usuario();
+		$user = new usuario();
 
-		$userEditable = $user-> getUsuarioModificable($id);
+		$userEditable = $user->getUserForId($id);
+
+
+		//query buscando el usuario con el id del get
+
+
 
 		if($userEditable != null){
 
@@ -72,7 +79,7 @@
 
 	}else{
 
-		header("Location:index.php");
+		//header("Location:index.php");
 	}
 
 ?>

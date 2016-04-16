@@ -37,20 +37,20 @@ class Usuario {
         return $pedido;
 
     }
-    public function getUsuarioModificable($id){
+    public function getUsersWhitCredential(){
 
-        $sql_query = "SELECT * FROM usuario ";
+        $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1";
 
        $pedido = $this->mysqli->query($sql_query); 
 
-       $userEditable = mysqli_fetch_array($pedido);
-
-       return  $userEditable;
+       return  $pedido;
 
     }
-    public function setUsuario($id,$formNombre,$formEmail){
+    public function getUserForId($id){
 
-        $sql_query = "UPDATE usuario SET nombre='$formNombre', email='$formEmail'  WHERE  id_usuario= '$id' ";
+        $sql_query =  "SELECT * FROM usuario WHERE id= '$id' ";
+        $pedido = $this->mysqli->query($sql_query); 
+        return  $pedido;
     }
 
 
