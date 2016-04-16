@@ -24,7 +24,7 @@
 		   					 <ul class="dropdown-menu">
 		   					 	<li><a  href="listarUsuariosHabilitables.php">Alta</a> </li>
 		   					 	<li><a href="baja_Usuario.php">Baja</a> </li>
-		   					 	<li><a href="listarUsuariosModificables.php">Modificación</a> </li>
+		   					 	<li><a href="usuariosModificables.php">Modificación</a> </li>
 		      
 		    				</ul>
 		  				</li>

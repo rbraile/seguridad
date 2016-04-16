@@ -39,7 +39,7 @@ class Usuario {
     }
     public function getUsuarioModificable($id){
 
-        $sql_query = "SELECT * FROM usuario WHERE  id_usuario = '$id' ";
+        $sql_query = "SELECT * FROM usuario ";
 
        $pedido = $this->mysqli->query($sql_query); 
 

@@ -11,7 +11,7 @@
 
 		$user= new  Usuario();
 
-		$userEditable = $user->getUsuarioModificable($id);
+		$userEditable = $user-> getUsuarioModificable($id);
 
 		if($userEditable != null){
 
@@ -26,7 +26,7 @@
 						</div>
 						<div class="form-group">   
 							 <label>Email:</label>
-					    	 <input type="email" class="form-control"  value="<?php echo $userEditable["email"]; ?> " name="email" required>
+					    	 <input type="text" class="form-control"  value="<?php echo $userEditable["email"]; ?> " name="email" required>
 						</div>
 						
 									 
@@ -46,11 +46,12 @@
 
 				$formNombre= $_POST['nombre'];
 
+
 				$formEmail= $_POST['email'];
 
 				$action = $user->setUsuario($id,$formNombre,$formEmail);
 
-				if($action != null){
+				if($action != 'false'){
 
 					header("Refresh:0 ; url=usuariosModificables.php" );
 
