@@ -6,6 +6,7 @@
         <link href="css/cssApp.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/funciones.js"></script>
         <title>Historial semanal de precios</title>
     </head>
     <body>
@@ -34,11 +35,11 @@
 
                     <table class="table">
                         <?php foreach ($precios as $key => $value) {?>
-                            <tr>
+                           <!--  <tr>
                                 <td><?php echo $value["id_usuario"];?></td>
                                 <td><?php echo $value["precio"];?></td>
-                                <td><a href="#" data-id="<?php echo $value["id_usuario"];?>" class="edit-precio">editar</a></td>
-                            </tr>
+                                
+                            </tr> -->
                     
                         <?php }?>
                     </table>
@@ -47,7 +48,7 @@
                     <?php
                         include('controller/Producto.php');
                         $producto = New Producto();
-                        $productos = $producto->getProductos($idSemana["id"]);
+                        $productos = $producto->getProductos();
 
                         foreach ($productos as $key => $value) {
                             ?>
@@ -58,14 +59,15 @@
                                 <td>
                                     <?php print_r($value["nombre"]); ?>
                                 </td>
-                                <td>
-                                <form action="guardarPrecio.php" method="POST">
-                                    <input type="hidden" name="idProducto" value="<?php echo $value["id"];?>">
-                                    <input type="text" name="precio" />
-                                    <input type="hidden" name="idSemana" value="<?php echo $idSemana['id']; ?>" />
-                                    <input type="submit" name="enviar" value="Eniar precio" />
-                                </form>
-                                </td>
+                                <td><a href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio">editar</a></td>
+                               <!--  <td>
+                                    <form action="guardarPrecio.php" method="POST">
+                                        <input type="hidden" name="idProducto" value="<?php echo $value["id"];?>">
+                                        <input type="text" name="precio" />
+                                        <input type="hidden" name="idSemana" value="<?php echo $idSemana['id']; ?>" />
+                                        <input type="submit" name="enviar" value="Eniar precio" />
+                                    </form>
+                                </td> -->
                             </tr>
                         <?php
                         }

@@ -16,8 +16,17 @@ class Precio {
         return $this->PrecioDao->getPreciosDao($idSemana);
     }
     
-    public function setPrecio($idProducto,$idUsuario,$idSemana,$precio) {
-        return $this->PrecioDao->setPrecioDao($idProducto,$idUsuario,$idSemana,$precio);
+    public function getPrecioById($idUsuario, $idProducto, $idSemana) {
+        return $this->PrecioDao->getPrecioByIdDao($idUsuario, $idProducto, $idSemana);
     }
+
+    public function addPrecio($idProducto,$idUsuario,$idSemana,$precio) {
+        return $this->PrecioDao->addPrecioDao($idProducto,$idUsuario,$idSemana,$precio);
+    }
+
+    public function updatePrecio($idPrecio, $precio) {
+        return $this->PrecioDao->updatePrecioDao($idPrecio, $precio);
+    }
+
 
 }

@@ -15,9 +15,9 @@ class ProductoDao {
         $this->mysqli = $this->db->getConnection();
     }
 
-    public function getProductosDao($idSemana) {
-        $sql_query = "SELECT * FROM producto as pro LEFT JOIN precio as pre ON pro.id = pre.id_producto 
-                        WHERE pro.habilitado = 1 AND pre.id_semana = $idSemana";
+    public function getProductosDao() {
+        $sql_query = "SELECT * FROM producto as pro 
+                        WHERE pro.habilitado = 1";
         $productosDao = $this->mysqli->query($sql_query);
         $productos = array();
         while($row = mysqli_fetch_assoc($productosDao)) {

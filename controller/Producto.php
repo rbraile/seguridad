@@ -11,8 +11,8 @@ class Producto {
         $this->ProductoDao = new ProductoDao();
     }
 
-    public function getProductos($idSemana) {
-        return $this->ProductoDao->getProductosDao($idSemana);
+    public function getProductos() {
+        return $this->ProductoDao->getProductosDao();
     }
 
 }
