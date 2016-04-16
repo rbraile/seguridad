@@ -52,11 +52,12 @@ INSERT INTO `precio` (`id_producto`, `id_usuario`, `id_semana`, `precio`, `fecha
 CREATE TABLE `semana` (
     `id` INT NOT NULL,
     `fecha_ini` DATETIME NOT NULL,
-    `fecha_fin` DATETIME NOT NULL
+    `fecha_fin` DATETIME NOT NULL,
+    `current` BOOLEAN NOT NULL
     ) ENGINE = InnoDB;
 
-INSERT INTO `semana` (`fecha_ini`, `fecha_fin`) VALUES 
-    ('2016-04-11 00:00:00','2016-04-17 23:59:59');
+INSERT INTO `semana` (`fecha_ini`, `fecha_fin`, `current`) VALUES 
+    ('2016-04-11 00:00:00','2016-04-17 23:59:59',1);
 
 
 

@@ -6,7 +6,7 @@ require_once "validarLogin.php";
 if( $_SESSION["userLevel"] == "admin"){
 
 
-		$user = new Usuario();
+		$user = new UsuarioDao();
 
 		$pedido = $user->getUsersWhitCredential();
 

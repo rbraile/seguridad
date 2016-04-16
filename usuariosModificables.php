@@ -81,7 +81,7 @@
 									echo'<td> '.$usuario["nombre"].'  </td>';
 									echo'<td> '.$usuario["email"].'  </td>';
 									echo'<td> '.$usuario["habilitado"].'  </td>';
-									echo'<td>' . '<a  class="btn btn-default" href="listarUsuariosModificables.php?ID='.$usuario["id"].'">Modificar</a>'.'</td>';
+									echo'<td>' . '<a  class="btn btn-default" href="modificarUsuario.php?ID='.$usuario["id"].'">Modificar</a>'.'</td>';
 									echo'</tr>';
 								}
 

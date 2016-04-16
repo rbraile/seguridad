@@ -1,16 +1,18 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+    session_start();
+}
 
-require_once "modelo/Usuario.php";
 
+require_once "modelo/UsuarioDao.php";
     if(isset($_POST['login'])) {
 
         $formEmail= $_POST['email'];
 
         $FormPassword= $_POST['password']; 
 
-        $user = new Usuario();
 
+        $user = new UsuarioDao();
         $resultado = $user->getUserCredential($formEmail,$FormPassword);
 
         echo 'seession: '.$_SESSION;
@@ -31,6 +33,7 @@ require_once "modelo/Usuario.php";
 
                 $_SESSION["userLevel"] = "user";
                 
+                $_SESSION["userId"] = $resultado[0]["id_usuario"];
                 header("Location: panel.php");
             }
 				}else{

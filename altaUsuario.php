@@ -3,10 +3,10 @@
 	
 
 	require_once "modelo/Conexion.php";
-	require_once "modelo/Usuario.php";
+	require_once "modelo/PrecioDao.php";
 
 
-	 $user = new Usuario();
+	 $user = new UsuarioDao();
 
 	$pedido = $user->getUserWithoutCredential();
 

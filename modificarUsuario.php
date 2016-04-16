@@ -1,27 +1,20 @@
 <?php
 	require_once "validarLogin.php";
 	require_once "modelo/Conexion.php";
-	require_once "modelo/Usuario.php";
+	require_once "modelo/UsuarioDao.php";
 	require_once "usuariosModificables.php";
 	require_once "listarUsuariosModificables.php";
 
 	//
 
-	if( $_SESSION["userLevel"] == "admin"){
-
+	
+	if( $_SESSION["userLevel"] == "admin" ){
 		$id = $_GET['ID'];
-
-		$user = new usuario();
-
+		$user = new usuarioDao();
 		$userEditable = $user->getUserForId($id);
-
-
 		//query buscando el usuario con el id del get
-
-
-
+		
 		if($userEditable != null){
-
 	?>	
 		<div class="container">
 			<div class="row centered">
@@ -53,33 +46,25 @@
 
 				$formNombre= $_POST['nombre'];
 
-
 				$formEmail= $_POST['email'];
 
-				$action = $user->setUsuario($id,$formNombre,$formEmail);
+				$action = $user->updateUsuario($id,$formNombre,$formEmail);
 
-				if($action != 'false'){
-
+				if($action == 1){
 					header("Refresh:0 ; url=usuariosModificables.php" );
-
-				}else{
-
-					echo('error al intentar cambiar los datos');
+				} else{
+					echo('Error al intentar cambiar los datos');
 				}
-
-
 			}
 
 		}
-		}else{ echo 'Error al intentar Editar el usuario. Intente más tarde';}
-
 		
 
 
-
-	}else{
-
-		//header("Location:index.php");
 	}
+}else{
+
+	//header("Location:index.php");
+}
 
 ?>
