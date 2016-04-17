@@ -7,15 +7,15 @@
 ?>
     <table class="table">
         <?php if($precios != 0): ?>
+            <tr>
+                <td>Producto</td>
+                <td>Maximo</td>
+                <td>Minimo</td>
+                <td>promedio</td>
+            </tr>
             <?php foreach ($precios as $key => $value) {?>
                 <tr>
-                    <td>Producto</td>
-                    <td>Maximo</td>
-                    <td>Minimo</td>
-                    <td>promedio</td>
-                </tr>
-                <tr>
-                    <td><?php echo $key;?></td>
+                    <td><strong><?php echo $key;?></strong></td>
                     <td><?php echo $value['maximo'];?></td>
                     <td><?php echo $value['minimo'];?></td>
                     <td><?php echo ($value['sumaTotal']/$value['contador']);?></td>
