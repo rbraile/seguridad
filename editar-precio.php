@@ -16,11 +16,10 @@
             }
 
             if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
-                <div class="container">
-                </div>
-        <div class="container">
-            <div class="panel panel-default">
-                  <!-- Default panel contents -->
+            <div class="container">
+                <?php include("nav.php");?>
+                <div class="panel panel-default">
+                      <!-- Default panel contents -->
                   <div class="panel-heading">Productos disponibles para ponerle precio</div>
                    <!-- Table -->
                         <?php 
@@ -52,6 +51,7 @@
                           </td>
                         </tr>
                     </table>
+                    <a class="btn btn-default btn-primary navbar-btn" href="/panel.php">Volver</a>
                 </div>
         </div>
         <?php
