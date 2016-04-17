@@ -15,7 +15,6 @@
                  session_start();
             }
 
-
             if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
                 <div class="container">
                 </div>
@@ -32,6 +31,8 @@
                         $idSemana = $semana->getCurrentSemana();
                         $precio = new Precio();
                         $poductoPrecio = $precio->getPrecioById($_SESSION["userId"], $_GET["idProducto"], $idSemana["id"]);
+                        // var_dump($idSemana);
+
                     ?>
                     <table class="table">
                         <tr>

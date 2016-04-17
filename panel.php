@@ -14,7 +14,22 @@
             include('validarLogin.php');
 
             if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
-                
+           
+            <header>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="/">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="/panel.php">Panel</a>
+                        </li>
+                        <li>
+                            <a href="/">Inicio</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
                 <div class="container">
                 </div>
         <div class="container">
@@ -27,21 +42,19 @@
                         include('controller/Precio.php');
                         include('controller/Semana.php');
                         $semana = new Semana();
-                        $idSemana = $semana->getCurrentSemana();
+                        $semanaObj = $semana->getCurrentSemana();
                         $precio = new Precio();
-                        $precios = $precio->getPrecios($idSemana["id"]);
+                        $precios = $precio->getPrecios($semanaObj["id"]);
                     ?>
-
-
                     <table class="table">
-                        <?php foreach ($precios as $key => $value) {?>
+                        <?php //foreach ($precios as $key => $value) {?>
                            <!--  <tr>
                                 <td><?php echo $value["id_usuario"];?></td>
                                 <td><?php echo $value["precio"];?></td>
                                 
                             </tr> -->
                     
-                        <?php }?>
+                        <?php //}?>
                     </table>
 
                   <table class="table">
