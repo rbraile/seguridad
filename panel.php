@@ -12,17 +12,41 @@
     <body>
         <?php
             include('validarLogin.php');
+            require_once "modelo/UsuarioDao.php";  
 
-            if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
+
+            if (isset($_SESSION["activeUser"])){ 
+
+                        $email = $_SESSION["activeUser"];
+
+                        $user= new UsuarioDao();
+
+                        $activeUser = $user->getUserForEmail($email);
+
+                        $id= $activeUser["id_usuario"];      
+                ?>
                 
                 <div class="container">
+
+                    <nav>
+                        <ul class="nav navbar-nav navbar-right ">
+                            <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario  <span class="caret"></span></a>
+                                  <ul class="dropdown-menu">
+                                        <li><?php echo '<a href="editarDatosPropios.php?ID='.$id.'">Editar Cuenta</a> '?></li>
+                                         <li role="separator" class="divider"></li>
+                                        <li><?php echo "<a href='cerrar_sesion.php'> Salir</a> "?></li>
+                                  </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
         <div class="container">
             <div class="panel panel-default">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">Productos disponibles para ponerle precio</div>
+                  <div class="panel-heading">Productos</div>
                    <!-- Table -->
-                   <p>formar la tabla en base a lo que se muestra. datos y cantidad de columnas</p>
+                   <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
                     <?php 
                         include('controller/Precio.php');
                         include('controller/Semana.php');
@@ -59,7 +83,7 @@
                                 <td>
                                     <?php print_r($value["nombre"]); ?>
                                 </td>
-                                <td><a href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio">editar</a></td>
+                                <td><a href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio btn btn-default"">editar</a></td>
                                <!--  <td>
                                     <form action="guardarPrecio.php" method="POST">
                                         <input type="hidden" name="idProducto" value="<?php echo $value["id"];?>">
