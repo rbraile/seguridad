@@ -8,7 +8,7 @@ if( $_SESSION["userLevel"] == "admin"){
 
 		$user = new UsuarioDao();
 
-		$pedido = $user->getUsersWhitCredential();
+		$pedido = $user->getUsersDeletables();
 
 		$usuario = mysqli_fetch_array($pedido);
 

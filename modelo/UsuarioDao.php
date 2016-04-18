@@ -54,7 +54,7 @@ class UsuarioDao {
     }
     public function getUsersDeletables(){
 
-        $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1 AND nombre <> 'admin'";
+        $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1 AND nombre <> 'admin' ";
 
        $pedido = $this->mysqli->query($sql_query); 
 

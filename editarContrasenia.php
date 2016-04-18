@@ -2,31 +2,26 @@
     
 	require_once "validarLogin.php";
     require_once "modelo/Conexion.php"; 
-     require_once "modelo/UsuarioDao.php";
+    require_once "modelo/UsuarioDao.php";
+    require_once "bodyForAdmin.php";
 
   
   if($_SESSION["userLevel"] == "admin"){
 
-	  	$user = new UsuarioDao();
+  	$userId= $_GET['ID'];
 
-	  	$email = $_SESSION["activeUser"];
 
-	  	$id= 1;
 
-	  	$element = $user->getUserForId($id);
-
-	  	$password = $element["password"];
-
-	  	$id= $element["id_usuario"];
-
-	  	if(	$element != null){
-
-	  		var_dump($id)
 ?>
 				<!DOCTYPE html>
 				<html>
 				<head>
-					<title>Modidicar Usuarios</title>
+					<meta charset="utf-8">
+					<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+					<link href="css/cssApp.css" rel="stylesheet">
+					<link href="css/bootstrap.min.css" rel="stylesheet">
+					<script src="js/bootstrap.min.js"></script>
+					<title>Modificar password</title>
 				</head>
 					<body>
 							<div class="container">
@@ -35,7 +30,7 @@
 										<form action="" name="editPassword" method="POST">
 											<div class="form-group">
 												<label>Cambie la contraseña:</label>
-											    <input type="text" class="form-control"  value="<?php echo $element["password"]; ?> "  name="password" required>
+											    <input type="text" class="form-control"  value="<?php echo $pedido["password"]; ?> "  name="password" required>
 											</div>			 
 											<button type="submit" name="cambiar" class="btn btn-default">Cambiar</button>
 											
@@ -51,31 +46,24 @@
 
 	  	$succes= 0;
 
- 		if(isset($_POST["cambiar"])){
-
- 			
+ 		if(isset($_POST["cambiar"])){	
 
  			if(isset($_POST['password']) && !empty($_POST['password'])){
 
- 					echo' password esta completo';
-
-	  			//	$succes= $user->setPassword($id,$password);
-
-	  				var_dump($succes);
-
+ 					$password= $_POST["password"];
+	  				$succes= $user->setPassword($id,$password);
  			}
+	 		if( $succes	== 1 ){
+
+	 			echo'su contraseña se cambió exitosamente por $password';
+	 			echo "<script>window.location='bodyForAdmin.php';</script>";
+
+	 		}else{
+
+	 			echo 'Hubo un error, su contraseña no pudo ser cambiada';
+	 		}
 
  		}
- 		if( $succes	== 1 ){
-
- 			echo'su contraseña se cambió exitosamente por $password';
-
- 		}else{
-
- 			echo 'Hubo un error, su contraseña no pudo ser cambiada';
- 		}
-
-  		
-  }
+ 		
 
 ?>
