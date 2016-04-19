@@ -1,11 +1,13 @@
 <?php
+	include_once'listarUsuariosBaja.php';
+	require_once "validarLogin.php";
+	require_once "modelo/Conexion.php";
+	require_once "modelo/UsuarioDao.php";
 
-
-require_once "validarLogin.php";
 
 if( $_SESSION["userLevel"] == "admin"){
 
-
+	 	
 		$user = new UsuarioDao();
 
 		$pedido = $user->getUsersDeletables();
@@ -29,7 +31,33 @@ if( $_SESSION["userLevel"] == "admin"){
 			
 			$usuario = mysqli_fetch_array($pedido);
 		}
+}else{
+	echo "<script>window.location='index.php';</script>";
+
 }
 
+if(isset($_GET['ID'])){	
+	$id = $_GET['ID'];
+
+	$user= new UsuarioDao();
+
+	$wasDeleted= $user->setFielEnable($id);
+
+	var_dump($wasDeleted);
+
+	if($wasDeleted == 1){
+
+	
+		echo "<script>window.location='listarUsuariosBaja.php';</script>";
+	}else{
+
+		echo'Error al borrar. Intente más tarde.';
+	}
+
+	
+}
+
+	
+	
 
 ?>

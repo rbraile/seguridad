@@ -1,3 +1,8 @@
+<?php
+	include_once "validarLogin.php";
+	include_once'bajaUsuario.php';
+
+?>
 <!DOCTYPE>
 <html lang="en">
 	<head>
@@ -9,12 +14,7 @@
 		<title>Historial semanal de precios</title>
 	</head>
 	<body>
-		<?php
-
-			require_once "validarLogin.php";
-			require_once "altaUsuario.php";
-
-			
+		<?php			
 
 			if (isset($_SESSION["activeUser"])){ ?>
 
@@ -48,9 +48,8 @@
 						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario  <span class="caret"></span></a>
 						          <ul class="dropdown-menu">
 							            <li><a href="#">Editar contraseña </a></li>
-							            <li role="separator" class="divider"></li>
+							             <li role="separator" class="divider"></li>
 							            <li><?php echo "<a href='cerrar_sesion.php'> Salir</a> "?></li>
-							            
 						          </ul>
 					        </li>
 		      			</ul>
@@ -59,9 +58,9 @@
 		<div class="container">
 			<div class="panel panel-default">
 				  <!-- Default panel contents -->
-				   <div class="panel-heading"><h3 class="text-center">Usuarios</h3></div>
+				  <div class="panel-heading"><h3 class="text-center">Usuarios</h3></div>
 				   <!-- Table -->
-				 
+				   
 				   <table class="table">
 				   	<tr>
 				  		<td>id</td>
@@ -79,7 +78,7 @@
 							echo'<td> '.$usuario["nombre"].'  </td>';
 							echo'<td> '.$usuario["email"].'  </td>';
 							echo'<td> '.$usuario["habilitado"].'  </td>';
-							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="habilitarUsuario.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
+							echo'<td>' . '<a  class="btn btn-default"  name="darBaja" href="bajaUsuario.php?ID='.$usuario["id"].'">Eliminar</a>'.'</td>';
 							echo'</tr>';
 						}
 

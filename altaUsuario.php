@@ -4,6 +4,9 @@
 
 	require_once "modelo/Conexion.php";
 	require_once "modelo/PrecioDao.php";
+	require_once "modelo/UsuarioDao.php";
+	require_once "validarLogin.php";
+	require_once "listarUsuariosHabilitables.php";
 
 
 	 $user = new UsuarioDao();
@@ -30,5 +33,6 @@
 		$usuario = mysqli_fetch_array($pedido);
 	}
 
+	
 	
 ?>

@@ -5,6 +5,7 @@ if(!isset($_SESSION)) {
 
 
 require_once "modelo/UsuarioDao.php";
+
     if(isset($_POST['login'])) {
 
         $formEmail= $_POST['email'];
@@ -26,6 +27,7 @@ require_once "modelo/UsuarioDao.php";
             if($resultado['nombre'] == "admin") {
 
                 $_SESSION["userLevel"] = "admin";
+
 
                 header("Location: bodyForAdmin.php");
 

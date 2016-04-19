@@ -12,15 +12,26 @@
     <body>
         <?php
             include('validarLogin.php');
+            require_once "modelo/UsuarioDao.php";  
 
-            if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
+
+            if (isset($_SESSION["activeUser"])){ 
+
+                        $email = $_SESSION["activeUser"];
+
+                        $user= new UsuarioDao();
+
+                        $activeUser = $user->getUserForEmail($email);
+
+                        $id= $activeUser["id_usuario"];      
+                ?>
         <div class="container">
             <?php include("nav.php");?>
             <div class="panel panel-default">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">Productos disponibles para ponerle precio</div>
+                  <div class="panel-heading">Productos</div>
                    <!-- Table -->
-                   <p>formar la tabla en base a lo que se muestra. datos y cantidad de columnas</p>
+                   <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
                     <?php 
                         include('controller/Precio.php');
                         include('controller/Semana.php');
@@ -53,6 +64,7 @@
                                     <?php print_r($value["id"]); ?>
                                 </td>
                                 <td>
+                                
                                     <?php print_r($value["nombre"]); ?>
                                 </td>
                                 <td><a class="btn btn-default navbar-btn btn-success" href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio">editar</a></td>
