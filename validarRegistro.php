@@ -1,7 +1,7 @@
 <?php
 
 	
-	include ("conexion.php");
+	require_once "modelo/UsuarioDao.php";
 
 	$succes= false;
 
@@ -26,15 +26,29 @@
 						$formEmail= $_POST['email'];
 						$formPassword= $_POST['password'];
 						
-						$query = "INSERT INTO  usuario (id_usuario, nombre, email, password,habilitado) VALUES (NULL, '$formNombre','$formEmail',$formPassword,'false') ";
 						
-						$insertar= $conexion->query($query);
+					$user = new UsuarioDao();
 
-						if($insertar){
+					$exist = $user->getUserForEmail($formEmail);	
+
+					if($exist != null){
+
+						echo 'ya existe un usuario con ese email';
+					}else{
+
+						$newUser = new UsuarioDao();
+
+						$insertado = $newUser->setNewUser($formNombre,$formEmail,$formPassword);
+					}
+					
+
+						if($insertado){
 
 							$succes = true;
 
 							echo'<script>alert("Ingreso exitoso.Espere a ser habilitado.");</script>';
+
+							header("Refresh:0; url=index.php");
 
 						
 							
@@ -50,5 +64,5 @@
 	}
 
 
-$conexion->close();
+
 ?>

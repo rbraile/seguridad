@@ -12,36 +12,43 @@
     <body>
         <?php
             include('validarLogin.php');
+            require_once "modelo/UsuarioDao.php";  
 
-            if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
-                
-                <div class="container">
-                </div>
+
+            if (isset($_SESSION["activeUser"])){ 
+
+                        $email = $_SESSION["activeUser"];
+
+                        $user= new UsuarioDao();
+
+                        $activeUser = $user->getUserForEmail($email);
+
+                        $id= $activeUser["id_usuario"];      
+                ?>
         <div class="container">
+            <?php include("nav.php");?>
             <div class="panel panel-default">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">Productos disponibles para ponerle precio</div>
+                  <div class="panel-heading">Productos</div>
                    <!-- Table -->
-                   <p>formar la tabla en base a lo que se muestra. datos y cantidad de columnas</p>
+                   <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
                     <?php 
                         include('controller/Precio.php');
                         include('controller/Semana.php');
                         $semana = new Semana();
-                        $idSemana = $semana->getCurrentSemana();
+                        $semanaObj = $semana->getCurrentSemana();
                         $precio = new Precio();
-                        $precios = $precio->getPrecios($idSemana["id"]);
+                        $precios = $precio->getPrecios($semanaObj["id"]);
                     ?>
-
-
                     <table class="table">
-                        <?php foreach ($precios as $key => $value) {?>
+                        <?php //foreach ($precios as $key => $value) {?>
                            <!--  <tr>
                                 <td><?php echo $value["id_usuario"];?></td>
                                 <td><?php echo $value["precio"];?></td>
                                 
                             </tr> -->
                     
-                        <?php }?>
+                        <?php //}?>
                     </table>
 
                   <table class="table">
@@ -57,9 +64,10 @@
                                     <?php print_r($value["id"]); ?>
                                 </td>
                                 <td>
+                                
                                     <?php print_r($value["nombre"]); ?>
                                 </td>
-                                <td><a href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio">editar</a></td>
+                                <td><a class="btn btn-default navbar-btn btn-success" href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio">editar</a></td>
                                <!--  <td>
                                     <form action="guardarPrecio.php" method="POST">
                                         <input type="hidden" name="idProducto" value="<?php echo $value["id"];?>">
