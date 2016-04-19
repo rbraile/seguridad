@@ -15,13 +15,11 @@
                  session_start();
             }
 
-
             if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
-                <div class="container">
-                </div>
-        <div class="container">
-            <div class="panel panel-default">
-                  <!-- Default panel contents -->
+            <div class="container">
+                <?php include("nav.php");?>
+                <div class="panel panel-default">
+                      <!-- Default panel contents -->
                   <div class="panel-heading">Productos disponibles para ponerle precio</div>
                    <!-- Table -->
                         <?php 
@@ -32,6 +30,8 @@
                         $idSemana = $semana->getCurrentSemana();
                         $precio = new Precio();
                         $poductoPrecio = $precio->getPrecioById($_SESSION["userId"], $_GET["idProducto"], $idSemana["id"]);
+                        // var_dump($idSemana);
+
                     ?>
                     <table class="table">
                         <tr>
@@ -51,6 +51,7 @@
                           </td>
                         </tr>
                     </table>
+                    <a class="btn btn-default btn-primary navbar-btn" href="/panel.php">Volver</a>
                 </div>
         </div>
         <?php

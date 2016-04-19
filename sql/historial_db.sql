@@ -14,6 +14,10 @@ INSERT INTO `usuario` (`nombre`, `email`, `habilitado`, `password`) VALUES
     ('admin', 'adminHistorial@gmail.com', 1, '@123B'),
     ('gigoberto', 'gigoloberto@gmail.com', 1, '$111A'),
     ('juan', 'j@gmail.com', 1, '1234'),
+    ('auan', 'a@gmail.com', 1, '1234'),
+    ('buan', 'b@gmail.com', 1, '1234'),
+    ('muan', 'm@gmail.com', 1, '1234'),
+    ('cuan', 'c@gmail.com', 1, '1234'),
     ('pedro', 'p@gmail.com', 1, '1234');
 
 CREATE TABLE  `producto` (
@@ -50,7 +54,7 @@ INSERT INTO `precio` (`id_producto`, `id_usuario`, `id_semana`, `precio`, `fecha
     (1,4,1,5, '2016-04-14 10:00:00');
 
 CREATE TABLE `semana` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `fecha_ini` DATETIME NOT NULL,
     `fecha_fin` DATETIME NOT NULL,
     `current` BOOLEAN NOT NULL

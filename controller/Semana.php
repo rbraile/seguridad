@@ -15,4 +15,9 @@ class Semana {
         return $this->SemanaDao->getCurrentSemanaDao();
     }
 
+    public function getAllSemanas() {
+        return $this->SemanaDao->getAllSemanasDao();    
+    }
+
+
 }
