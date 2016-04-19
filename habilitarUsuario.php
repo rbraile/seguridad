@@ -23,10 +23,6 @@
 
 				echo "<script>window.location='listarUsuariosHabilitables.php';</script>";
 
-				
-
-			
-
 			}else{
 
 				echo'Error al intentar habilitarlo.Intente más tarde';
