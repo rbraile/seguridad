@@ -58,27 +58,38 @@
 
 			if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['email']) && !empty($_POST['email'])){
 
-				$formNombre= $_POST['nombre'];
-				$formEmail= $_POST['email'];
+				$formNombre= mb_strtolower($_POST['nombre']);
+				$formEmail= mb_strtolower($_POST['email']);
 				$password= $userEditable["password"];
 
 				$stringType= is_string($formNombre);
 				$emailType= verificarEmail($formEmail); 
 
-				$action= 0;
-				if($stringType && $emailType){
+				$userDb= new UsuarioDao();
+				$pedido= $userDb->getUserForEmail($formEmail);
+				if($pedido == 1){
 
-					$action = $user->updateUsuario($id,$formNombre,$formEmail,$password);
-				}else{
-
-					echo'Error: valores ingresados inválidos.';
-				}
-				if($action == 1){
-				
+					echo'Error: Ese mail lo posee otro usuario';
 					echo "<script>window.location='usuariosModificables.php';</script>";
-				} else{
-					echo('Error al intentar cambiar los datos');
+				}else{
+					$action= 0;
+					if($stringType && $emailType){
+
+						$action = $user->updateUsuario($id,$formNombre,$formEmail,$password);
+					}else{
+
+						echo'Error: valores ingresados inválidos.';
+					}
+					if($action == 1){
+					
+						echo "<script>window.location='usuariosModificables.php';</script>";
+					} else{
+						echo('Error al intentar cambiar los datos');
+					}
+
 				}
+
+				
 			}
 
 		}
