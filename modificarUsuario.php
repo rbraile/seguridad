@@ -62,7 +62,7 @@
 				$formEmail= mb_strtolower($_POST['email']);
 				$password= $userEditable["password"];
 
-				$stringType= is_string($formNombre);
+				$stringType= stringValido($formNombre);
 				$emailType= verificarEmail($formEmail); 
 
 				$userDb= new UsuarioDao();
