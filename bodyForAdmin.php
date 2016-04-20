@@ -13,7 +13,7 @@
 			include('validarLogin.php');
 			//include('altaUsuario.php');
 
-			if (isset($_SESSION["activeUser"]))
+			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin")
 			{ 
 
 				$data = $_SESSION["activeUser"];

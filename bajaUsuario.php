@@ -5,7 +5,7 @@
 	require_once "modelo/UsuarioDao.php";
 
 
-if( $_SESSION["userLevel"] == "admin"){
+if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 
 	 	
 		$user = new UsuarioDao();

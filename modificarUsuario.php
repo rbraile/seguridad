@@ -4,11 +4,11 @@
 	require_once "modelo/UsuarioDao.php";
 	require_once "usuariosModificables.php";
 	require_once "listarUsuariosModificables.php";
-
+	require_once "validarEmail.php";
 	//
 
 	
-	if( $_SESSION["userLevel"] == "admin" ){
+	if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 
 
 		$id = $_GET['ID'];
@@ -52,19 +52,27 @@
 		</body>
 </html>
 	<?php
+			
 
 		if(isset($_POST['editar'])){
 
 			if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['email']) && !empty($_POST['email'])){
 
 				$formNombre= $_POST['nombre'];
-
 				$formEmail= $_POST['email'];
-
 				$password= $userEditable["password"];
 
-				$action = $user->updateUsuario($id,$formNombre,$formEmail,$password);
+				$stringType= is_string($formNombre);
+				$emailType= verificarEmail($formEmail); 
 
+				$action= 0;
+				if($stringType && $emailType){
+
+					$action = $user->updateUsuario($id,$formNombre,$formEmail,$password);
+				}else{
+
+					echo'Error: valores ingresados inválidos.';
+				}
 				if($action == 1){
 				
 					echo "<script>window.location='usuariosModificables.php';</script>";

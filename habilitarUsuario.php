@@ -5,9 +5,7 @@
 	require_once "altaUsuario.php";
 	require_once "listarUsuariosHabilitables.php";
 
-
-
-	if($_SESSION["userLevel"] == "admin"){
+	if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 	
 			$id= $_GET['ID'];
 

@@ -1,9 +1,8 @@
 <?php
 
-
 require_once "validarLogin.php";
 
-if( $_SESSION["userLevel"] == "admin"){
+if( isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 
 
 		$user = new UsuarioDao();
