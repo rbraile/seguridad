@@ -14,29 +14,77 @@
             //include('altaUsuario.php');
             if (isset($_SESSION["activeUser"]))
             { 
-                $data = $_SESSION["activeUser"];
-                $user = new UsuarioDao();
-                $pedido= $user->getUserForEmail($data);
-                $id= $pedido["id_usuario"];
+                
+                include("controller/Producto.php");
+                $producto = new Producto();
+
+                if(isset($_GET["deleteProducto"])) {
+                    $productoById = $producto->getProductoById($_GET["deleteProducto"]);
+                    $result = $producto->deleteProducto($productoById[0]["id"]);
+                    header("Location: productos-lista.php");
+                } else {
+
+
+
         ?>
                 <div class="container">
                     <?php include("headerAdmin.php");?>
                 </div>
+
+                <div class="container">
+                    <div class="panel panel-default">
+                <?php if(isset($_GET["idProducto"])) {
+                    $productoById = $producto->getProductoById($_GET["idProducto"]);
+                    ?>
+                    <div class="panel-heading">Alta de Productos</div>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                        <input type="text" name="nombre" value="<?php echo $productoById[0]['nombre'];?>" />
+                        <br />
+                        <label for="habilitado">Producto habilitado</label>
+                        <input type="checkbox" name="habilitado" id="habilitado" <?php if($productoById[0]['habilitado'] == 1){ echo 'checked="checked"';}?> />
+                        <br />
+                        <input type="hidden" value="<?php echo $_GET["idProducto"];?>" name="id">
+                        <input type="submit" name="editar" value="Editar" />
+                    </form>  
+                <?php } else {?>
+
+                        <div class="panel-heading">Alta de Productos</div>
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                            <input type="text" name="nombre" placeholder="Nombre del producto" />
+                            <br />
+                            <label for="habilitado">Producto habilitado</label>
+                            <input type="checkbox" name="habilitado" id="habilitado" value="1" />
+                            <br />
+                            <input type="submit" name="altaP" value="Guardar" />
+                        </form>
+                <?php }?>
+                <?php 
+                    if(isset($_POST["altaP"]) && isset($_POST["nombre"])) {
+                        $nombre = $_POST["nombre"];
+                        $habilitado = (isset($_POST["habilitado"]))?1:0;
+                        $id = $producto->setProducto($nombre, $habilitado);
+                    }
+
+                    if(isset($_POST["editar"]) && isset($_POST["nombre"])) {
+                        $nombre = $_POST["nombre"];
+                        $habilitado = (isset($_POST["habilitado"]))?1:0;
+                        $id = $_POST["id"];
+                        $id = $producto->editarProducto($id,$nombre, $habilitado);
+                        
+                        
+                    }
+                ?>
+                    </div>
+                </div>
+
         <?php
             }
-            else {
-                header("Location: index.php");
-            }
+                }
+                else {
+                    header("Location: index.php");
+                }
         ?>
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading">Alta de Productos</div>
-                <form>
-                    <input type="text" name="nombre" placeholder="Nombre del producto" />
-                    <input type="submit" name="guardar" value="Guardar" />
-                </form>
-            </div>
-        </div>
+        
         
     </body>
 

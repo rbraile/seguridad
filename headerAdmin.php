@@ -1,6 +1,6 @@
 <ul class="nav nav-pills fixed-top">
     <li>
-        <a href="/bodyForAdmin.php">Inicio</a>
+        <a href="/bodyForAdmin.php">INICIO</a>
     </li>
     <li role="presentation" class="dropdown">
          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -21,7 +21,7 @@
          <ul class="dropdown-menu">
             <li><a href="/productos.php">Alta</a> </li>
             <li><a href="#">Baja</a> </li>
-            <li><a href="#">Modificación</a> </li>
+            <li><a href="/productos-lista.php">Modificación</a> </li>
 
         </ul>
     </li>

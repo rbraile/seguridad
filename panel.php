@@ -55,7 +55,7 @@
                     <?php
                         include('controller/Producto.php');
                         $producto = New Producto();
-                        $productos = $producto->getProductos();
+                        $productos = $producto->getProductosHabilitados();
 
                         foreach ($productos as $key => $value) {
                             ?>
