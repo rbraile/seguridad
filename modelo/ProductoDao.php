@@ -45,6 +45,11 @@ class ProductoDao {
         }
         return $productos;
     }
+    public function getProductoByName($nombre){
+        $sql_query = "SELECT * FROM producto WHERE nombre = '$nombre'";
+        $producto = $this->mysqli->query($sql_query);   
+        return mysqli_fetch_assoc($producto); 
+    }
 
     public function setProductoDao($nombre, $habilitado) {
         $sql_query = "INSERT INTO producto (nombre, habilitado) VALUES ('$nombre', $habilitado)";

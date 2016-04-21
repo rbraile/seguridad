@@ -21,7 +21,7 @@
 
                         $user= new UsuarioDao();
 
-                        $activeUser = $user->getUserForEmail($email);
+                        $activeUser = $user->getUserByEmail($email);
 
                         $id= $activeUser["id_usuario"];      
                 ?>

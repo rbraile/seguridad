@@ -11,6 +11,7 @@
     <body>
         <?php
             include('validarLogin.php');
+            require_once "validarString.php";
             //include('altaUsuario.php');
             if (isset($_SESSION["activeUser"]))
             { 
@@ -59,18 +60,49 @@
                         </form>
                 <?php }?>
                 <?php 
-                    if(isset($_POST["altaP"]) && isset($_POST["nombre"])) {
-                        $nombre = $_POST["nombre"];
-                        $habilitado = (isset($_POST["habilitado"]))?1:0;
-                        $id = $producto->setProducto($nombre, $habilitado);
+                    
+
+                    if(isset($_POST["altaP"]) && isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
+
+                        $nombre = mb_strtolower($_POST["nombre"]);
+
+                        $productoDb= new ProductoDao();
+                        $found= $productoDb->getProductoByName($nombre);
+
+                        $typeString= stringValido($nombre);
+
+
+                            if($typeString){
+
+                                if(!$found){
+                                     $habilitado = (isset($_POST["habilitado"]))?1:0;
+                                     $id = $producto->setProducto($nombre, $habilitado);
+                                     echo 'Producto ingresado correctamente';
+                                }else{
+                                    echo'El producto ya existe.';
+                                }
+                                
+                            }else{ echo 'Ingrese un valor válido';}  
                     }
 
-                    if(isset($_POST["editar"]) && isset($_POST["nombre"])) {
-                        $nombre = $_POST["nombre"];
-                        $habilitado = (isset($_POST["habilitado"]))?1:0;
-                        $id = $_POST["id"];
-                        $id = $producto->editarProducto($id,$nombre, $habilitado);
-                        
+                    if(isset($_POST["editar"]) && isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
+
+                        $nombre = mb_strtolower($_POST["nombre"]);
+
+                        $productoDb= new ProductoDao();
+                        $found= $productoDb->getProductoByName($nombre);
+
+                        $typeString= stringValido($nombre);
+
+                            if($typeString){
+                                if(!$found){
+                                     $habilitado = (isset($_POST["habilitado"]))?1:0;
+                                     $id = $_POST["id"];
+                                     $id = $producto->editarProducto($id,$nombre, $habilitado);
+                                     echo'Cambio exitoso.';
+                                }else{echo'El producto ya existe.';}
+                                
+                            }else{ echo'Ingrese un valor correcto.'; }
                         
                     }
                 ?>

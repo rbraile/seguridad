@@ -24,7 +24,7 @@
 
 				$user= new UsuarioDao();
 
-				$activeUser= $user->getUserForId($idUser);
+				$activeUser= $user->getUserById($idUser);
 
 				$nombre= $activeUser["nombre"];
 				$email=$activeUser["email"];
@@ -74,16 +74,20 @@
 
 				if(isset($_POST["editar"])){
 
-					$formNombre= $_POST["nombre"];
-					$formEmail= $_POST["email"];
+					$formNombre=trim(mb_strtolower($_POST['nombre']));
+					$formEmail= trim(mb_strtolower($_POST['email']));
+
+					$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+					$nombreType= stringValido($formNombre);
+
 					$formPassword= $_POST["password"];
 					$user2= new UsuarioDao();
-
-					$isSet= $user2->updateUsuario($idUser,$formNombre,$formEmail,$formPassword);
-
-					$_SESSION["activeUser"]= $formEmail;
-
-
+					if($emailType && $nombreType){
+						$isSet= $user2->updateUsuario($idUser,$formNombre,$formEmail,$formPassword);
+						$_SESSION["activeUser"]= $formEmail;
+					}else{
+						echo'Valores ingresados inválidos';
+					}
 					if($isSet == 1){
 
 						echo "<script>window.location='panel.php';</script>";
@@ -91,7 +95,7 @@
 					}
 
 				}
-				 echo '<a  class="btn btn-default"  name="darAlta" href="panel.php">Atrás</a>';
+				 echo '<a  class="btn btn-default"  name="atras" href="panel.php">Atrás</a>';
 				
 			}
 			else

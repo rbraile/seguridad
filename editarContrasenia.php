@@ -12,7 +12,7 @@
   	$userId= $_GET['ID'];
 
   	$user= new UsuarioDao();
-  	$pedido= $user->getUserForId($userId);
+  	$pedido= $user->getUserById($userId);
 
 ?>
 				<!DOCTYPE html>

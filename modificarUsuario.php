@@ -4,7 +4,7 @@
 	require_once "modelo/UsuarioDao.php";
 	require_once "usuariosModificables.php";
 	require_once "listarUsuariosModificables.php";
-	require_once "validarEmail.php";
+	require_once "validarString.php";
 	//
 
 	
@@ -14,7 +14,7 @@
 		$id = $_GET['ID'];
 		
 		$user = new usuarioDao();
-		$userEditable = $user->getUserForId($id);
+		$userEditable = $user->getUserById($id);
 		//query buscando el usuario con el id del get
 
 	
@@ -58,15 +58,16 @@
 
 			if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['email']) && !empty($_POST['email'])){
 
-				$formNombre= mb_strtolower($_POST['nombre']);
-				$formEmail= mb_strtolower($_POST['email']);
+				$formNombre= trim(mb_strtolower($_POST['nombre'])); 
+
+				$formEmail= trim(mb_strtolower($_POST['email'])); 
 				$password= $userEditable["password"];
 
 				$stringType= stringValido($formNombre);
-				$emailType= verificarEmail($formEmail); 
+				$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL); 
 
 				$userDb= new UsuarioDao();
-				$pedido= $userDb->getUserForEmail($formEmail);
+				$pedido= $userDb->getUserByEmail($formEmail);
 				if($pedido == 1){
 
 					echo'Error: Ese mail lo posee otro usuario';

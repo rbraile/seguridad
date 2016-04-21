@@ -22,7 +22,7 @@
 
 				$user = new UsuarioDao();
 
-				$pedido= $user->getUserForEmail($data);
+				$pedido= $user->getUserByEmail($data);
 
 				$id= $pedido["id_usuario"];
 				?>

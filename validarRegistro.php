@@ -2,7 +2,6 @@
 
 	
 	require_once "modelo/UsuarioDao.php";
-	require_once "validarEmail.php";
 	require_once "validarString.php";
 	
 
@@ -20,12 +19,15 @@
 
 				if(isset($_POST['password']) && !empty($_POST['password'])){
 
-						$formNombre= mb_strtolower($_POST['nombre']);
-						$formEmail= mb_strtolower($_POST['email']);
+
+
+						$formNombre= trim(mb_strtolower($_POST['nombre']));
+						$formEmail= trim(mb_strtolower($_POST['email']));
 						$formPassword= $_POST['password'];
 
 
-					$emailType= verificarEmail($formEmail);
+					$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+
 					$nombreType= stringValido($formNombre);
 					$user = new UsuarioDao();
 					$exist = $user->getUserForEmail($formEmail);
