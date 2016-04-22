@@ -13,6 +13,7 @@
 			include('validarLogin.php');
 			require_once "modelo/Conexion.php";
 			require_once "modelo/UsuarioDao.php";
+			require_once "validarString.php";
 		
 			//include('altaUsuario.php');
 
@@ -44,7 +45,8 @@
 						<div class="container">
 							<div class="row centered">
 								 <div class="jumbotron col-md-6">	
-								 <p>Edita tus datos:</p>	
+
+								 <h3 class="text-center">Edita tus datos</h3>
 									<form action="" name="formModificar" method="POST">
 										<div class="form-group">
 											<label>Nombre:</label>
@@ -95,7 +97,7 @@
 					}
 
 				}
-				 echo '<a  class="btn btn-default"  name="atras" href="panel.php">Atrás</a>';
+				 echo '<a  class="btn  btn-primary"   name="atras" href="panel.php">Atrás</a>';
 				
 			}
 			else

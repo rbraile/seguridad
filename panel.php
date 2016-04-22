@@ -29,9 +29,13 @@
             <?php include("nav.php");?>
             <div class="panel panel-default">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">Productos</div>
+                  <div class="panel-heading"> 
+                        <h3 class="text-center">Productos</h3> 
+                        <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
+
+                  </div>
                    <!-- Table -->
-                   <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
+                   
                     <?php 
                         include('controller/Precio.php');
                         include('controller/Semana.php');

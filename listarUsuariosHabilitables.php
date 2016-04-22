@@ -17,13 +17,7 @@
 			
 
 			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){ 
-				$data = $_SESSION["activeUser"];
-
-				$user = new UsuarioDao();
-
-				$pedido= $user->getUserByEmail($data);
-
-				$id= $pedido["id_usuario"];
+				
 		?>
 			<div class="container">
 					    <?php include("headerAdmin.php");?>
@@ -44,8 +38,9 @@
 				  	</tr>
 				  	<tr>
 					<?php
+						if(isset($listaUsuarios)){
 
-						foreach ($listaUsuarios as $usuario) {
+							foreach ($listaUsuarios as $usuario) {
 							echo'<tr>';
 							echo'<td> '.$usuario["id"].' </td>';
 							echo'<td> '.$usuario["nombre"].'  </td>';
@@ -54,6 +49,8 @@
 							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="habilitarUsuario.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
 							echo'</tr>';
 						}
+						}
+						
 
 					?>
 					</tr>	   

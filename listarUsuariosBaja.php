@@ -47,14 +47,19 @@
 				  	<tr>
 					<?php
 
-						foreach ($listaUsuarios as $usuario) {
+						if(isset($listaUsuarios)){
+
+							foreach ($listaUsuarios as $usuario) {
 							echo'<tr>';
 							echo'<td> '.$usuario["id"].' </td>';
 							echo'<td> '.$usuario["nombre"].'  </td>';
 							echo'<td> '.$usuario["email"].'  </td>';
 							echo'<td> '.$usuario["habilitado"].'  </td>';
 							echo'<td>' . '<a  class="btn btn-default"  name="darBaja" href="bajaUsuario.php?ID='.$usuario["id"].'">Eliminar</a>'.'</td>';
-							echo'</tr>';
+							echo'</tr>';	
+
+							}
+
 						}
 
 					?>

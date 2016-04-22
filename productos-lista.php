@@ -25,7 +25,7 @@
 
                 <div class="container">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Listado de Productos</div>
+                        <div class="panel-heading"><h3 class="text-center">Listado de Productos</h3> </div>
                         <ul class="list-group">
                             <?php foreach ($productos as $key => $value) { ?>
                             <li class="list-group-item">

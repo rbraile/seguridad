@@ -43,7 +43,6 @@ if(isset($_GET['ID'])){
 
 	$wasDeleted= $user->setFielEnable($id);
 
-	var_dump($wasDeleted);
 
 	if($wasDeleted == 1){
 
