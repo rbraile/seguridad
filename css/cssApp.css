@@ -8,3 +8,15 @@
           justify-content: center;
     margin-top: 10%;
 }
+.in-top{
+
+	margin-top: 0;
+}
+.btn{
+
+	margin: 10px;
+}
+.no-margin{
+	margin-top:0;
+	margin-right:0;
+}

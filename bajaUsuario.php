@@ -5,7 +5,7 @@
 	require_once "modelo/UsuarioDao.php";
 
 
-if( $_SESSION["userLevel"] == "admin"){
+if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 
 	 	
 		$user = new UsuarioDao();
@@ -43,7 +43,6 @@ if(isset($_GET['ID'])){
 
 	$wasDeleted= $user->setFielEnable($id);
 
-	var_dump($wasDeleted);
 
 	if($wasDeleted == 1){
 

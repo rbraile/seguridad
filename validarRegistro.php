@@ -2,6 +2,8 @@
 
 	
 	require_once "modelo/UsuarioDao.php";
+	require_once "validarString.php";
+	
 
 	$succes= false;
 
@@ -15,33 +17,42 @@
 
 			if(isset($_POST['email']) && !empty($_POST['email'])){
 
-						
-				
-
 				if(isset($_POST['password']) && !empty($_POST['password'])){
-						
-					
 
-						$formNombre= $_POST['nombre'];
-						$formEmail= $_POST['email'];
+
+
+						$formNombre= trim(mb_strtolower($_POST['nombre']));
+						$formEmail= trim(mb_strtolower($_POST['email']));
 						$formPassword= $_POST['password'];
-						
-						
+
+
+					$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+
+					$nombreType= stringValido($formNombre);
 					$user = new UsuarioDao();
+					$exist = $user->getUserForEmail($formEmail);
+					$insertado= false;	
 
-					$exist = $user->getUserForEmail($formEmail);	
+					if($emailType){
 
-					if($exist != null){
+							if($exist != null){
 
-						echo 'ya existe un usuario con ese email';
-					}else{
+								echo 'ya existe un usuario con ese email';
+							}else{
 
-						$newUser = new UsuarioDao();
+								if($nombreType){
 
-						$insertado = $newUser->setNewUser($formNombre,$formEmail,$formPassword);
-					}
+									$newUser = new UsuarioDao();
+									$insertado = $newUser->setNewUser($formNombre,$formEmail,$formPassword);
+								}else{
+
+									echo'Error: valores inválidos';
+									}
+
+								}
+
+					}			
 					
-
 						if($insertado){
 
 							$succes = true;
