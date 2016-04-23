@@ -13,6 +13,7 @@
 			include('validarLogin.php');
 			require_once "modelo/Conexion.php";
 			require_once "modelo/UsuarioDao.php";
+			require_once "validarString.php";
 		
 			//include('altaUsuario.php');
 
@@ -24,7 +25,7 @@
 
 				$user= new UsuarioDao();
 
-				$activeUser= $user->getUserForId($idUser);
+				$activeUser= $user->getUserById($idUser);
 
 				$nombre= $activeUser["nombre"];
 				$email=$activeUser["email"];
@@ -44,7 +45,8 @@
 						<div class="container">
 							<div class="row centered">
 								 <div class="jumbotron col-md-6">	
-								 <p>Edita tus datos:</p>	
+
+								 <h3 class="text-center">Edita tus datos</h3>
 									<form action="" name="formModificar" method="POST">
 										<div class="form-group">
 											<label>Nombre:</label>
@@ -74,16 +76,20 @@
 
 				if(isset($_POST["editar"])){
 
-					$formNombre= $_POST["nombre"];
-					$formEmail= $_POST["email"];
+					$formNombre=trim(mb_strtolower($_POST['nombre']));
+					$formEmail= trim(mb_strtolower($_POST['email']));
+
+					$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+					$nombreType= stringValido($formNombre);
+
 					$formPassword= $_POST["password"];
 					$user2= new UsuarioDao();
-
-					$isSet= $user2->updateUsuario($idUser,$formNombre,$formEmail,$formPassword);
-
-					$_SESSION["activeUser"]= $formEmail;
-
-
+					if($emailType && $nombreType){
+						$isSet= $user2->updateUsuario($idUser,$formNombre,$formEmail,$formPassword);
+						$_SESSION["activeUser"]= $formEmail;
+					}else{
+						echo'Valores ingresados inválidos';
+					}
 					if($isSet == 1){
 
 						echo "<script>window.location='panel.php';</script>";
@@ -91,7 +97,7 @@
 					}
 
 				}
-				 echo '<a  class="btn btn-default"  name="darAlta" href="panel.php">Atrás</a>';
+				 echo '<a  class="btn  btn-primary"   name="atras" href="panel.php">Atrás</a>';
 				
 			}
 			else

@@ -62,14 +62,14 @@ class UsuarioDao {
 
     }
 
-    public function getUserForId($id){
+    public function getUserById($id){
 
         $sql_query =  "SELECT * FROM usuario WHERE id_usuario= $id ";
         $pedido = $this->mysqli->query($sql_query); 
         return mysqli_fetch_array($pedido);
     }
 
-    public function getUserForEmail($email){
+    public function getUserByEmail($email){
         $sql_query =  "SELECT * FROM usuario WHERE email= '$email' ";
         $pedido = $this->mysqli->query($sql_query); 
         return mysqli_fetch_array($pedido);

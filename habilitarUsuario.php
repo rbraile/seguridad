@@ -5,19 +5,13 @@
 	require_once "altaUsuario.php";
 	require_once "listarUsuariosHabilitables.php";
 
-
-
-	if($_SESSION["userLevel"] == "admin"){
+	if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 	
 			$id= $_GET['ID'];
 
 			$user = new UsuarioDao();
 
-			var_dump($user);
-
-			$userInProgress= $user->setUserCredential($id);
-			
-			var_dump($userInProgress);
+			$userInProgress= $user->setUserCredential($id);			
 
 			if($userInProgress == 1){
 
