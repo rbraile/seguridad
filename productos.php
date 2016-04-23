@@ -33,8 +33,8 @@
                 </div>
 
             <div class="container">
-                <div class="row">
-                   <div class="col-md-12 centered"> 
+                <div class="row centered">
+                   <div class="col-md-6"> 
                      <div class="panel panel-default">
                     <?php if(isset($_GET["idProducto"])) {
                         $productoById = $producto->getProductoById($_GET["idProducto"]);
@@ -45,8 +45,8 @@
 
                             <input type="text" class="form-control" name="nombre" value="<?php echo $productoById[0]['nombre'];?>" />
                             
-                            <div class="checkbox">
-                                 <label class="form-label" for="habilitado">Producto habilitado
+                            <div class="">
+                                 <label class="form-label" for="habilitado">Producto habilitado</label>
                                  <input type="checkbox" name="habilitado" id="habilitado" <?php if($productoById[0]['habilitado'] == 1){ echo 'checked="checked"';}?> />
                                 
                             </div>
