@@ -101,13 +101,26 @@
 
                             $typeString= stringValido($nombre);
 
+                             $habilitado = (isset($_POST["habilitado"]))?1:0;
+
                                 if($typeString){
                                     if(!$found){
                                          $habilitado = (isset($_POST["habilitado"]))?1:0;
                                          $id = $_POST["id"];
                                          $id = $producto->editarProducto($id,$nombre, $habilitado);
                                          echo'Cambio exitoso.';
-                                    }else{echo'El producto ya existe.';}
+                                    }else{
+
+                                        if($found && $habilitado == 1 || $habilitado ==0){
+
+                                                $habilitado = (isset($_POST["habilitado"]))?1:0;
+                                                 $id = $_POST["id"];
+                                                $id = $producto->editarProducto($id,$nombre, $habilitado);
+                                                 echo'Cambio exitoso.'; 
+
+                                        }else{ echo'El producto ya existe.';} 
+
+                                        ;}
                                     
                                 }else{ echo'Ingrese un valor correcto.'; }
                             
