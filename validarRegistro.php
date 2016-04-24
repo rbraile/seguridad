@@ -30,7 +30,7 @@
 
 					$nombreType= stringValido($formNombre);
 					$user = new UsuarioDao();
-					$exist = $user->getUserForEmail($formEmail);
+					$exist = $user->getUserByEmail($formEmail);
 					$insertado= false;	
 
 					if($emailType){
