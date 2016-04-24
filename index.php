@@ -33,14 +33,15 @@
                 </div>
             </div>      
         </div>
+        <?php 
+            $semana = new Semana();
+            $semanaCurrent = $semana->getCurrentSemana();
+            $semanas = $semana->getAllSemanas();
+
+        ?>
         <div class="container">
         <div class="panel panel-default">
-            <div class="panel-heading">Semanas anteriores del historial de precios</div>
-            <?php 
-                $semana = new Semana();
-                $semanaCurrent = $semana->getCurrentSemana();
-                $semanas = $semana->getAllSemanas();
-            ?>
+            <div class="panel-heading">Semanas anteriores del historial de precios del <?php echo $semanaCurrent['fecha_ini'] ?> al <?php echo $semanaCurrent['fecha_fin'] ?></div>
                 <ul class="list-group">
                     <?php foreach ($semanas as $key => $value) {?>
                         <?php if($value["id"] != $semanaCurrent["id"]):?>
