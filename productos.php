@@ -39,7 +39,7 @@
                     <?php if(isset($_GET["idProducto"])) {
                         $productoById = $producto->getProductoById($_GET["idProducto"]);
                         ?>
-                        <div class="panel-heading"><h3 class="centered">Alta de Productos</h3> </div>
+                        <div class="panel-heading"><h3 class="centered">Modificar Producto</h3> </div>
 
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
@@ -56,7 +56,7 @@
                         </form>  
                     <?php } else {?>
 
-                            <div class="panel-heading"><h3>Alta de Productos</h3> </div>
+                            <div class="panel-heading"><h3>Alta Producto</h3> </div>
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                                 <input type="text" name="nombre" class="form-control"  placeholder="Nombre del producto" />
                                 <br />
