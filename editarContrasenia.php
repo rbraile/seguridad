@@ -55,7 +55,7 @@
  			if(isset($_POST['password']) && !empty($_POST['password'])){
 
  					$password= $_POST["password"];
-	  				$succes= $user->setPassword($id,$password);
+	  				$succes= $user->setPassword($userId,$password);
  			}
 	 		if( $succes	== 1 ){
 
