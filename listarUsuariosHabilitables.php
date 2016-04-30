@@ -10,12 +10,8 @@
 	</head>
 	<body>
 		<?php
-
 			require_once "validarLogin.php";
-			require_once "altaUsuario.php";
-
-			
-
+			require_once "controller/Usuario.php";
 			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){ 
 				
 		?>
@@ -38,17 +34,19 @@
 				  	</tr>
 				  	<tr>
 					<?php
+                        $usuario = new Usuario();
+                        $listaUsuarios = $usuario->getUserWithoutCredential();
 						if(isset($listaUsuarios)){
-
+                            // var_dump($listaUsuarios);
 							foreach ($listaUsuarios as $usuario) {
-							echo'<tr>';
-							echo'<td> '.$usuario["id"].' </td>';
-							echo'<td> '.$usuario["nombre"].'  </td>';
-							echo'<td> '.$usuario["email"].'  </td>';
-							echo'<td> '.$usuario["habilitado"].'  </td>';
-							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="habilitarUsuario.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
-							echo'</tr>';
-						}
+    							echo'<tr>';
+    							echo'<td> '.$usuario["id"].' </td>';
+    							echo'<td> '.$usuario["nombre"].'  </td>';
+    							echo'<td> '.$usuario["email"].'  </td>';
+    							echo'<td> '.$usuario["habilitado"].'  </td>';
+    							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="habilitarUsuario.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
+    							echo'</tr>';
+						    }
 						}
 						
 
