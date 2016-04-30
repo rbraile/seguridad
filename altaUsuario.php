@@ -9,29 +9,31 @@
 	require_once "listarUsuariosHabilitables.php";
 
 
-	 $user = new UsuarioDao();
+	$user = new UsuarioDao();
 
 	$pedido = $user->getUserWithoutCredential();
 
-	$usuario = mysqli_fetch_array($pedido);
+    
 
-	$listaUsuarios = array();
+	// $usuario = mysqli_fetch_array($pedido);
 
-	while($usuario != null)
-	{
-		$newObject = array(
+	// $listaUsuarios = array();
 
-			'id'=> $usuario['id_usuario'],
-			'nombre' => $usuario['nombre'],
-			'email' => $usuario['email'],
-			'habilitado' => $usuario['habilitado'],
-			'password' => $usuario['password'],
-		);
+	// while($usuario != null)
+	// {
+	// 	$newObject = array(
 
-		array_push($listaUsuarios, $newObject);
+	// 		'id'=> $usuario['id_usuario'],
+	// 		'nombre' => $usuario['nombre'],
+	// 		'email' => $usuario['email'],
+	// 		'habilitado' => $usuario['habilitado'],
+	// 		'password' => $usuario['password'],
+	// 	);
+
+	// 	array_push($listaUsuarios, $newObject);
 		
-		$usuario = mysqli_fetch_array($pedido);
-	}
+	// 	$usuario = mysqli_fetch_array($pedido);
+	// }
 
 	
 	

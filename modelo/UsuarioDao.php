@@ -34,15 +34,16 @@ class UsuarioDao {
         return $this->mysqli->affected_rows;
     }
 
-    public function getUserWithoutCredential(){
-
+    public function getUserWithoutCredentialDao(){
         $sql_query = "SELECT * FROM usuario WHERE  habilitado = 0";
-
         $pedido = $this->mysqli->query($sql_query);
-
-        return $pedido;
-
+        $listaUsuarios = array();
+        while($usuario = mysqli_fetch_array($pedido)) {
+            array_push($listaUsuarios, $this->mapUser($usuario));
+        }
+        return $listaUsuarios;
     }
+
     public function getUsersWhitCredential(){
 
         $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1";
@@ -103,5 +104,18 @@ class UsuarioDao {
          $this->mysqli->query($sql_query); 
         return $this->mysqli->affected_rows;
     }
+
+    public function mapUser($usuario) {
+        $newUsuario = array();
+        $newUsuario = [
+            'id'=> $usuario['id_usuario'],
+            'nombre' => $usuario['nombre'],
+            'email' => $usuario['email'],
+            'habilitado' => $usuario['habilitado'],
+            'password' => $usuario['password']
+        ];
+        return $newUsuario;
+    }
+            
 
 }
