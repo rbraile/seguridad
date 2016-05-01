@@ -1,24 +1,20 @@
 <!DOCTYPE>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
-		<link href="css/cssApp.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<script src="js/bootstrap.min.js"></script>
+		<?php include("head-admin.php");?>
 		<title>Historial semanal de precios</title>
 	</head>
 	<body>
 		<?php
 			include('validarLogin.php');
-			//include('altaUsuario.php');
+			include('controller/Usuario.php');
 
 			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin")
 			{ 
 
 				$data = $_SESSION["activeUser"];
 
-				$user = new UsuarioDao();
+				$user = new Usuario();
 
 				$pedido= $user->getUserByEmail($data);
 

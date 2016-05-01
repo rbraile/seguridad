@@ -11,8 +11,7 @@
 	<body>
 		<?php
 			include('validarLogin.php');
-			require_once "modelo/Conexion.php";
-			require_once "modelo/UsuarioDao.php";
+			require_once "controller/Usuario.php";
 			require_once "validarString.php";
 		
 			//include('altaUsuario.php');
@@ -23,7 +22,7 @@
 
 				$idUser= $_GET["ID"];
 
-				$user= new UsuarioDao();
+				$user= new Usuario();
 
 				$activeUser= $user->getUserById($idUser);
 
@@ -83,9 +82,9 @@
 					$nombreType= stringValido($formNombre);
 
 					$formPassword= $_POST["password"];
-					$user2= new UsuarioDao();
+					$user2= new Usuario();
 					if($emailType && $nombreType){
-						$isSet= $user2->updateUsuario($idUser,$formNombre,$formEmail,$formPassword);
+						$isSet= $user2->updateSelfUsuario($idUser,$formNombre,$formEmail,$formPassword);
 						$_SESSION["activeUser"]= $formEmail;
 					}else{
 						echo'Valores ingresados inválidos';

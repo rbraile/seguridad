@@ -1,7 +1,19 @@
 <?php
-	include_once "validarLogin.php";
-	include_once'bajaUsuario.php';
+    require_once "modelo/Conexion.php";
+    require_once "validarLogin.php";
+    require_once "controller/Usuario.php";
 
+if(isset($_GET['ID'])){
+    $id = $_GET['ID'];
+    $user= new UsuarioDao();
+    $wasDeleted= $user->setFielEnable($id);
+
+    if($wasDeleted == 1){
+        echo "<script>window.location='listarUsuariosBaja.php';</script>";
+    }else{
+        echo'Error al borrar. Intente más tarde.';
+    }
+} else {
 ?>
 <!DOCTYPE>
 <html lang="en">
@@ -17,14 +29,8 @@
 		<?php			
 
 			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){ 
-				
-				$data = $_SESSION["activeUser"];
-
-				$user = new UsuarioDao();
-
-				$pedido= $user->getUserByEmail($data);
-
-				$id= $pedido["id_usuario"];
+                $user = new Usuario();
+                $listaUsuarios = $user->getUsersDeletables();
 				?>
 
 				<div class="container">
@@ -46,42 +52,28 @@
 				  	</tr>
 				  	<tr>
 					<?php
-
 						if(isset($listaUsuarios)){
-
 							foreach ($listaUsuarios as $usuario) {
 							echo'<tr>';
 							echo'<td> '.$usuario["id"].' </td>';
 							echo'<td> '.$usuario["nombre"].'  </td>';
 							echo'<td> '.$usuario["email"].'  </td>';
 							echo'<td> '.$usuario["habilitado"].'  </td>';
-							echo'<td>' . '<a  class="btn btn-default"  name="darBaja" href="bajaUsuario.php?ID='.$usuario["id"].'">Eliminar</a>'.'</td>';
+							echo'<td>' . '<a  class="btn btn-default"  name="darBaja" href="listarUsuariosBaja.php?ID='.$usuario["id"].'">Eliminar</a>'.'</td>';
 							echo'</tr>';	
-
-							}
-
 						}
-
+					}
 					?>
 					</tr>	   
-				  
-				  	
-
-				    
 				  </table>
 				</div>
 		</div>
-
-		
 		<?php
-
-				
 			}else{
-
 				header("Location: index.php");
 			}
 		?>
-		
+<?php }//else?>
 	</body>
 
 </html>

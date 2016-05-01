@@ -12,14 +12,14 @@
     <body>
         <?php
             include('validarLogin.php');
-            require_once "modelo/UsuarioDao.php";  
+            require_once "controller/Usuario.php";  
 
 
             if (isset($_SESSION["activeUser"])){ 
 
                         $email = $_SESSION["activeUser"];
 
-                        $user= new UsuarioDao();
+                        $user= new Usuario();
 
                         $activeUser = $user->getUserByEmail($email);
 
