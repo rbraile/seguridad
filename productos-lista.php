@@ -11,7 +11,7 @@
     <body>
         <?php
             include('validarLogin.php');
-            //include('altaUsuario.php');
+            include('controller/Usuario.php');
             if (isset($_SESSION["activeUser"]))
             { 
                 include("controller/Producto.php");

@@ -1,17 +1,11 @@
 <?php
     
 	require_once "validarLogin.php";
-    require_once "modelo/Conexion.php"; 
-    require_once "modelo/UsuarioDao.php";
+    require_once "controller/Usuario.php";
     
-
-
-  
   if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
-
   	$userId= $_GET['ID'];
-
-  	$user= new UsuarioDao();
+  	$user= new Usuario();
   	$pedido= $user->getUserById($userId);
 
 ?>
@@ -50,12 +44,12 @@
 
 	  	$succes= 0;
 
- 		if(isset($_POST["cambiar"])){	
+ 		if(isset($_POST["cambiar"])){
 
  			if(isset($_POST['password']) && !empty($_POST['password'])){
-
- 					$password= $_POST["password"];
-	  				$succes= $user->setPassword($id,$password);
+				$password= $_POST["password"];
+                // $userId= $_GET['ID'];
+  				$succes= $user->setPassword($userId,$password);
  			}
 	 		if( $succes	== 1 ){
 
