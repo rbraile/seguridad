@@ -47,9 +47,15 @@
  		if(isset($_POST["cambiar"])){
 
  			if(isset($_POST['password']) && !empty($_POST['password'])){
+<<<<<<< HEAD
+
+ 					$password= $_POST["password"];
+	  				$succes= $user->setPassword($userId,$password);
+=======
 				$password= $_POST["password"];
                 // $userId= $_GET['ID'];
   				$succes= $user->setPassword($userId,$password);
+>>>>>>> 29499438c4e47578593d7f572a5002ee4a91f3f8
  			}
 	 		if( $succes	== 1 ){
 

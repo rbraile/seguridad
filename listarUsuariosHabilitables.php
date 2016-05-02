@@ -1,23 +1,32 @@
+<?php
+require_once "validarLogin.php";
+
+if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
+	require_once "controller/Usuario.php";
+    if(isset($_GET['ID'])) {
+        $id= $_GET['ID'];
+        $user = new Usuario();
+        $userInProgress= $user->setUserCredential($id);      
+        if($userInProgress == 1){
+            echo "<script>window.location='listarUsuariosHabilitables.php';</script>";
+        }else{
+            echo'Error al intentar habilitarlo.Intente más tarde';
+            //header("Refresh:0; url=listarUsuariosHabilitables.php");
+        }
+    } else {
+?>
 <!DOCTYPE>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
-		<link href="css/cssApp.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<script src="js/bootstrap.min.js"></script>
-		<title>Historial semanal de precios</title>
-	</head>
-	<body>
-		<?php
-
-			require_once "validarLogin.php";
-			require_once "altaUsuario.php";
-
-			
-
-			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){ 
-				
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <link href="css/cssApp.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <script src="js/bootstrap.min.js"></script>
+        <title>Historial semanal de precios</title>
+    </head>
+    <body>
+        <?php
 		?>
 			<div class="container">
 					    <?php include("headerAdmin.php");?>
@@ -38,40 +47,31 @@
 				  	</tr>
 				  	<tr>
 					<?php
+                        $usuario = new Usuario();
+                        $listaUsuarios = $usuario->getUserWithoutCredential();
 						if(isset($listaUsuarios)){
-
+                            // var_dump($listaUsuarios);
 							foreach ($listaUsuarios as $usuario) {
-							echo'<tr>';
-							echo'<td> '.$usuario["id"].' </td>';
-							echo'<td> '.$usuario["nombre"].'  </td>';
-							echo'<td> '.$usuario["email"].'  </td>';
-							echo'<td> '.$usuario["habilitado"].'  </td>';
-							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="habilitarUsuario.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
-							echo'</tr>';
+    							echo'<tr>';
+    							echo'<td> '.$usuario["id"].' </td>';
+    							echo'<td> '.$usuario["nombre"].'  </td>';
+    							echo'<td> '.$usuario["email"].'  </td>';
+    							echo'<td> '.$usuario["habilitado"].'  </td>';
+    							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="listarUsuariosHabilitables.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
+    							echo'</tr>';
+						    }
 						}
-						}
-						
-
 					?>
 					</tr>	   
-				  
-				  	
-
-				    
 				  </table>
 				</div>
 		</div>
+		<?php }?>
+<?php }else {
+    echo $_SESSION["userLevel"];
+        //header("Location: index.php");
+    }?>
 
-		
-		<?php
-
-				
-			}else{
-
-				header("Location: index.php");
-			}
-		?>
-		
 	</body>
 
 </html>

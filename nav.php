@@ -1,8 +1,8 @@
 <?php
-require_once "modelo/UsuarioDao.php";
+require_once "controller/Usuario.php";
 	$data = $_SESSION["activeUser"];
 
-                $user = new UsuarioDao();
+                $user = new Usuario();
 
                 $pedido= $user->getUserByEmail($data);
 
