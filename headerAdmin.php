@@ -1,11 +1,8 @@
 <?php
     $data = $_SESSION["activeUser"];
-
-                $user = new UsuarioDao();
-
-                $pedido= $user->getUserByEmail($data);
-
-                $id= $pedido["id_usuario"];
+    $user = new Usuario();
+    $pedido= $user->getUserByEmail($data);
+    $id= $pedido["id_usuario"];
 ?>
 <ul class="nav nav-pills fixed-top">
     <li>
@@ -39,8 +36,8 @@
 
               echo''.$data.'';?> <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                     <li><?php echo '<a href="editarContrasenia.php?ID='.$id.'">Editar Contraseña</a> '?></li>
-                     <li role="separator" class="divider"></li>
+                    <li><?php echo '<a href="editarContrasenia.php?ID='.$id.'">Editar Contraseña</a> '?></li>
+                    <li role="separator" class="divider"></li>
                     <li><?php echo "<a href='cerrar_sesion.php'> Salir</a> "?></li>
               </ul>
         </li>
