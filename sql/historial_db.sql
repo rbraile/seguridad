@@ -26,6 +26,12 @@ CREATE TABLE  `producto` (
     `habilitado` BOOLEAN NOT NULL
     ) ENGINE = InnoDB;
 
+CREATE TABLE  `comentario` (
+    `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `comentario` TEXT(0),
+    `id_usuario` INT NULL
+    ) ENGINE = InnoDB;
+
 INSERT INTO `producto` (`nombre`,`habilitado`) VALUES 
     ('Azucar', 1),
     ('Arroz', 1),

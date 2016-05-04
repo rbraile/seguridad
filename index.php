@@ -89,6 +89,19 @@
                     <?php endif;?>
                 </table>
             </div>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Precios de semanas actual</div>
+                <div class="">
+                    <form action="comentario.php" method="POST">
+                        <label>Comentario</label>
+                        <textarea name="comentario">
+                            
+                        </textarea>
+                        <input type="submit" value="Comentar" name="comentar" />
+                    </form>
+                </div>
+            </div>
         </div>
 	</body>
 </html>
