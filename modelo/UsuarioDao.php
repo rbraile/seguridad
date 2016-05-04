@@ -2,29 +2,20 @@
 /*
 * Usuario class
 */
-
 require_once "modelo/Conexion.php";
-//require_once "modificarUsuario.php";
-
-
 
 class UsuarioDao {    
     private $_db;
     private $_mysqli;
 
     public function UsuarioDao() {
-
         $this->db = Conexion::getInstance();
-
         $this->mysqli = $this->db->getConnection();
     }
 
-    public function getUserCredential($formEmail,$FormPassword) {
-
-        $sql_query = "SELECT * FROM usuario WHERE email='$formEmail' AND password='$FormPassword' AND habilitado = 1";
-
+    public function getUserCredentialDao($formEmail) {
+        $sql_query = "SELECT * FROM usuario WHERE email='$formEmail' AND habilitado = 1";
         $pedido = $this->mysqli->query($sql_query);
-
         return mysqli_fetch_array($pedido);
     }
 
@@ -45,22 +36,15 @@ class UsuarioDao {
     }
 
     public function getUsersWhitCredential(){
-
-        $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1";
-
+       $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1";
        $pedido = $this->mysqli->query($sql_query); 
-
        return  $pedido;
-
     }
+
     public function getUsersDeletables(){
-
-        $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1 AND nombre <> 'admin' ";
-
+       $sql_query = "SELECT * FROM usuario WHERE  habilitado = 1 AND nombre <> 'admin' ";
        $pedido = $this->mysqli->query($sql_query); 
-
        return  $pedido;
-
     }
 
     public function getUserById($id){
@@ -77,19 +61,21 @@ class UsuarioDao {
     }
 
     public function setPassword($id,$password){
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
-         $sql_query = "UPDATE usuario SET  password= '$password' WHERE id_usuario = $id";
-         $this->mysqli->query($sql_query); 
+        $sql_query = "UPDATE usuario SET  password= '$password' WHERE id_usuario = $id";
+        $this->mysqli->query($sql_query); 
         return $this->mysqli->affected_rows;
 
     }
 
     public function setNewUser($formNombre,$formEmail,$formPassword){
-
+        $formPassword = password_hash($formPassword, PASSWORD_DEFAULT);
         $sql_query = "INSERT INTO  usuario (id_usuario, nombre, email, password,habilitado)
-         VALUES (NULL, '$formNombre','$formEmail',$formPassword,'false') ";
+         VALUES (NULL, '$formNombre','$formEmail','$formPassword','false') ";
          $this->mysqli->query($sql_query); 
         return $this->mysqli->affected_rows;
+
     }
     public function setUserCredential($id){
 

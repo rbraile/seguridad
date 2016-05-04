@@ -11,8 +11,18 @@ class Usuario {
         $this->UsuarioDao = new UsuarioDao();
     }
 
+    public function getUserCredential($email,$password) {
+        $user = $this->UsuarioDao->getUserCredentialDao($email);
+        if(password_verify($password, $user["password"])) {
+            return $user;
+        } 
+        return false;
+    }
+
+
     public function getUserWithoutCredential() {
-        return $this->UsuarioDao->getUserWithoutCredentialDao();    
+        return $this->UsuarioDao->getUserWithoutCredentialDao();
+
     }
 
     public function getPrecios($idSemana) {
