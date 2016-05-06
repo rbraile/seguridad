@@ -11,6 +11,8 @@ if(isset($_POST["comentar"])){
     $_POST["comentario"];
     $comentario = new Comentario();
     $comentario->addComentario($_POST["comentario"],$userId);
+    header("Location: comentario.php");
+} else {
     ?>
     <div class="container">
     <div class="panel panel-default">
@@ -25,15 +27,23 @@ if(isset($_POST["comentar"])){
                     <td>comentario</td>
                 </tr>
             <?php
+                $comentario = new Comentario();
                 $listaComentario = $comentario->AllComentarios();
-                if(isset($listaComentario)){
+                if(isset($listaComentario) && $listaComentario){
                     foreach ($listaComentario as $comentario) {
                         echo '<tr>';
-                        echo '<td> '.$comentario["id"].' </td>';
-                        echo '<td> '.$comentario["nombre"].'  </td>';
+                        echo '<td> '.$comentario["id"].' </td>' ;
+                        if($comentario["nombre"] !== NULL) {
+                            echo '<td> '. $comentario["nombre"] . '  </td>';
+                        } else {
+                            echo '<td>ANONIMO</td>';
+                        }
+
                         echo '<td> '.$comentario["comentario"].'  </td>';
                         echo '</tr>';
                     }
+                } else {
+                    echo "no hay comentarios";
                 }
                 ?>
             </table>

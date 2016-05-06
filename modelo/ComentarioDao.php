@@ -22,13 +22,15 @@ class ComentarioDao {
     public function AllComentariosDao() {
         $sql_query = "select co.comentario, us.nombre, us.id_usuario, co.id from comentario AS co LEFT JOIN usuario AS us ON co.id_usuario = us.id_usuario";
 
-
         $pedido = $this->mysqli->query($sql_query);
         $listaComentarios = array();
-        while($comentario = mysqli_fetch_array($pedido)) {
-            array_push($listaComentarios, $this->mapComentario($comentario));
+        if($pedido) {
+            while($comentario = mysqli_fetch_array($pedido)) {
+                array_push($listaComentarios, $this->mapComentario($comentario));
+            }
+            return $listaComentarios;
         }
-        return $listaComentarios;
+        return false;
     }
 
      public function mapComentario($comentario) {
