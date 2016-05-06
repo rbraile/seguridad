@@ -48,7 +48,7 @@
 
 	  	$succes= 0;
 
- 		if(isset($_POST["cambiar"])){
+ 		if(isset($_POST["cambiar"]) && checkCredentials('admin', $data)){
 
  			if(isset($_POST['password']) && !empty($_POST['password'])){
 				$password= $_POST["password"];
