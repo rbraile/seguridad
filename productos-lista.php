@@ -12,8 +12,10 @@
         <?php
             include('validarLogin.php');
             include('controller/Usuario.php');
-            if (isset($_SESSION["activeUser"]))
-            { 
+            require_once "credentials/userCredentialsCheck.php";
+  
+            $data= $_SESSION["activeUser"];
+            if (checkCredentials('admin',$data)){
                 include("controller/Producto.php");
                 $Producto = new Producto();
                 $productos = $Producto->getProductos(); 

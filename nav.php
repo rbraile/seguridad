@@ -20,7 +20,7 @@ require_once "controller/Usuario.php";
 
 			              echo''.$data.'';?> <span class="caret"></span></a>
 			              <ul class="dropdown-menu">
-			                     <li><?php echo '<a href="editarDatosPropios.php?ID='.$id.'">Cuenta</a> '?></li>
+			                     <li><?php echo '<a href="editarDatosPropios.php?is='.base64_encode($id).'">Cuenta</a> '?></li>
 			                     <li role="separator" class="divider"></li>
 			                    <li><?php echo "<a href='cerrar_sesion.php'> Salir</a> "?></li>
 			              </ul>

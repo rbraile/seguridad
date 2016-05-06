@@ -8,11 +8,13 @@
 		<?php
 			include('validarLogin.php');
 			include('controller/Usuario.php');
+			include('credentials/userCredentialsCheck.php');
 
-			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin")
+			$data = $_SESSION["activeUser"];
+
+			if (checkCredentials('admin', $data))
 			{ 
-
-				$data = $_SESSION["activeUser"];
+				
 
 				$user = new Usuario();
 

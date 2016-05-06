@@ -8,45 +8,62 @@ require_once "modelo/UsuarioDao.php";
 
     if(isset($_POST['login'])) {
 
-        $formEmail= $_POST['email'];
-
-        $FormPassword= $_POST['password']; 
+        if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['email']) && !empty($_POST['email'])){
 
 
-        $user = new UsuarioDao();
-        $resultado = $user->getUserCredential($formEmail,$FormPassword);
+             $FormPassword= $_POST['password']; 
+             $formEmail= trim(mb_strtolower($_POST['email']));
+             $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
 
-        echo 'seession: '.$_SESSION;
-			
-        if($resultado) {
+             if($emailType){
+                 $user = new UsuarioDao();
+                 $resultado = $user->getUserCredential($formEmail,$FormPassword);
 
-            $_SESSION["activeUser"]= $formEmail;
+                 if($resultado){
+                         $_SESSION["activeUser"]= $formEmail;
 
-				if($resultado['habilitado'] == 1){
+                         if($resultado['habilitado'] == 1){
+                             $token = sha1(rand(0,999).rand(999,9999).rand(1,300));
+                             $_SESSION['token'] = $token;
 
-            if($resultado['nombre'] == "admin") {
+                                    $time = new DateTime();
+                                    $time->add(new DateInterval('PT' . 1 . 'M'));
+                                    $datetime= $time->format('Y-m-d H:i:s');
+                                    $_SESSION['expirationDate'] = $time;
 
-                $_SESSION["userLevel"] = "admin";
+                                    if($resultado['nombre'] == "admin") {
+                                         var_dump( $token);
+                                         $_SESSION["userLevel"] = "admin";
+                                        
+                                          $userToken= new UsuarioDao();
+                                         $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
+                                         if($tokenSucces== 1){
+                                             header("Location: bodyForAdmin.php");
+                                         }else{echo'Error al crear claves de acceso.';
+                                            header('index.php');}
+                                         
+                                    }else{
+                                        $_SESSION["userLevel"] = "user";
+                                         $_SESSION["activeUser"]= $formEmail;                
+                                         $_SESSION["userId"] = $resultado[0]["id_usuario"];
+                                          $userToken= new UsuarioDao();
+                                          $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
+                                          if($tokenSucces==1){
+                                              header("Location: panel.php");
+                                          }else{echo'Error al crear claves de acceso.';header('index.php');} 
+                                    }
+                                      
 
+                         }else{
+                             echo '<p>Si hace poco se registró. Espere ser dado de alta. </p>';}
+                        
+                 }else{echo'Los valores ingresados no son válidos';
+                    header("Location: index.php");}
+            }else{
 
-                header("Location: bodyForAdmin.php");
-
-            } else {
-
-                $_SESSION["userLevel"] = "user";
-                
-                $_SESSION["userId"] = $resultado[0]["id_usuario"];
-                header("Location: panel.php");
-            }
-				}else{
-
-					echo '<p>Aún no ha sido habilitado.Intente otro día.</p>';
-					//header("Location: index.php"); "esta comentado para que se vea el texto de respuesta. pero la idea es que redireccione"
-				}
-        } else {
-            echo'<script>alert("No existe registro del usuario ingresado.");</script>';
-            header("Location: index.php");
-				//header("Location: index.php");"esta comentado para que se vea el texto de respuesta. pero la idea es que redireccione"
-        };
+                echo'Los valores ingresados no son válidos';}
+        }
     }
+			
+       
 ?>

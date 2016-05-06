@@ -70,7 +70,7 @@ class UsuarioDao {
 
         $sql_query =  "SELECT * FROM usuario WHERE id_usuario= $id ";
         $pedido = $this->mysqli->query($sql_query);
-        return mysqli_fetch_array($pedido);
+         return mysqli_fetch_array($pedido);
     }
 
     public function getUserByEmailDao($email){
@@ -116,6 +116,11 @@ class UsuarioDao {
             'password' => $usuario['password']
         ];
         return $newUsuario;
+    }
+    public function updateUsuarioKey($token,$time,$email){
+        $sql_query = "UPDATE usuario SET token='$token' , tokenExpirationTime = '$time' WHERE email='$email'  ";
+         $this->mysqli->query($sql_query); 
+        return $this->mysqli->affected_rows;
     }
             
 

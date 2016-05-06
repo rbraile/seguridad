@@ -5,6 +5,8 @@ USE historial_db;
 CREATE TABLE `historial_db`.`usuario` ( `id_usuario` INT NOT NULL AUTO_INCREMENT , 
     `nombre` VARCHAR(15) NOT NULL , 
     `email` VARCHAR(50) NOT NULL ,
+    `token` VARCHAR(50),
+    `tokenExpirationTime` DATETIME,
     `habilitado` BOOLEAN NOT NULL ,
     `password` VARCHAR(8) NOT NULL , PRIMARY KEY (`id_usuario`), 
      UNIQUE `email` (`email`(50))
@@ -13,7 +15,7 @@ CREATE TABLE `historial_db`.`usuario` ( `id_usuario` INT NOT NULL AUTO_INCREMENT
 INSERT INTO `usuario` (`nombre`, `email`, `habilitado`, `password`) VALUES
     ('admin', 'adminHistorial@gmail.com', 1, '@123B'),
     ('gigoberto', 'gigoloberto@gmail.com', 1, '$111A'),
-    ('juan', 'j@gmail.com', 1, '1234'),
+    ('juan', 'juantoliva@gmail.com', 1, '1234'),
     ('auan', 'a@gmail.com', 1, '1234'),
     ('buan', 'b@gmail.com', 1, '1234'),
     ('muan', 'm@gmail.com', 1, '1234'),

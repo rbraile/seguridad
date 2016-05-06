@@ -42,4 +42,5 @@ class Usuario {
     public function setPassword($id,$password){
         return $this->UsuarioDao->setPasswordDao($id,$password);    
     }
+    
 }

@@ -1,10 +1,12 @@
 <?php
 require_once "validarLogin.php";
-
-if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
+require_once "credentials/userCredentialsCheck.php";
+$data= $_SESSION["activeUser"];
+if (checkCredentials('admin',$data)){
 	require_once "controller/Usuario.php";
-    if(isset($_GET['ID'])) {
-        $id= $_GET['ID'];
+    if(isset($_GET['current'])) {
+        $value= $_GET['current'];
+        $id= base64_decode($value);
         $user = new Usuario();
         $userInProgress= $user->setUserCredential($id);      
         if($userInProgress == 1){
@@ -26,8 +28,6 @@ if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
         <title>Historial semanal de precios</title>
     </head>
     <body>
-        <?php
-		?>
 			<div class="container">
 					    <?php include("headerAdmin.php");?>
 	                </div>
@@ -57,7 +57,7 @@ if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
     							echo'<td> '.$usuario["nombre"].'  </td>';
     							echo'<td> '.$usuario["email"].'  </td>';
     							echo'<td> '.$usuario["habilitado"].'  </td>';
-    							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="listarUsuariosHabilitables.php?ID='.$usuario["id"].'">Aceptar</a>'.'</td>';
+    							echo'<td>' . '<a  class="btn btn-default"  name="darAlta" href="listarUsuariosHabilitables.php?current='.base64_encode($usuario["id"]).'">Aceptar</a>'.'</td>';
     							echo'</tr>';
 						    }
 						}
@@ -69,7 +69,7 @@ if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
 		<?php }?>
 <?php }else {
     echo $_SESSION["userLevel"];
-        //header("Location: index.php");
+        header("Location: index.php");
     }?>
 
 	</body>

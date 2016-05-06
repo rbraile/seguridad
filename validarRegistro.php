@@ -1,6 +1,7 @@
 <?php
 
 	
+
 	require_once "modelo/UsuarioDao.php";
 	require_once "validarString.php";
 	
@@ -30,7 +31,7 @@
 
 					$nombreType= stringValido($formNombre);
 					$user = new UsuarioDao();
-					$exist = $user->getUserByEmail($formEmail);
+					$exist = $user->getUserByEmailDao($formEmail);
 					$insertado= false;	
 
 					if($emailType){

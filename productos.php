@@ -13,8 +13,10 @@
             include('validarLogin.php');
             require_once "validarString.php";
             include('controller/Usuario.php');
-            if (isset($_SESSION["activeUser"]))
-            { 
+            require_once "credentials/userCredentialsCheck.php";
+  
+            $data= $_SESSION["activeUser"];
+            if (checkCredentials('admin',$data)){
                 
                 include("controller/Producto.php");
                 $producto = new Producto();
@@ -24,8 +26,6 @@
                     $result = $producto->deleteProducto($productoById[0]["id"]);
                     header("Location: productos-lista.php");
                 } else {
-
-
 
         ?>
                 <div class="container">

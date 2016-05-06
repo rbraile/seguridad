@@ -2,9 +2,13 @@
     
 	require_once "validarLogin.php";
     require_once "controller/Usuario.php";
-    
-  if(isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
-  	$userId= $_GET['ID'];
+    include('credentials/userCredentialsCheck.php');
+
+	$data = $_SESSION["activeUser"];
+	
+	if (checkCredentials('admin', $data)){ 
+
+  	$userId= base64_decode($_GET['is']);
   	$user= new Usuario();
   	$pedido= $user->getUserById($userId);
 
