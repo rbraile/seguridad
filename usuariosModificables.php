@@ -65,7 +65,7 @@ if (checkCredentials('admin',$data)){
                        <!-- Table -->
                        <table class="table">
                         <tr>
-                            <td>id</td>
+                           
                             <td>nombre</td>
                             <td>email</td>
                             <td>habilitado</td>
@@ -77,7 +77,7 @@ if (checkCredentials('admin',$data)){
                                 $listaUsuarios = $user->getUsersDeletables();
                                 foreach ($listaUsuarios as $usuario) {
                                     echo'<tr>';
-                                    echo'<td> '.$usuario["id"].' </td>';
+                                 
                                     echo'<td> '.$usuario["nombre"].'  </td>';
                                     echo'<td> '.$usuario["email"].'  </td>';
                                     echo'<td> '.$usuario["habilitado"].'  </td>';

@@ -24,17 +24,17 @@
 
 				$isCurrent=$_GET["is"]; 
 				$idUser= base64_decode($isCurrent);
-				$emailSession= $_SESSION["activeUser"];
+				$token= $_SESSION["token"];
 				$user= new Usuario();
 
 				$activeUser= $user->getUserById($idUser);
 
-				$emailDb= $activeUser["email"];
+				$tokenDb= $activeUser["token"];
 				$nombre= $activeUser["nombre"];
 				$email=$activeUser["email"];
 				$password= $activeUser["password"];
 
-				if($emailSession == $emailDb){
+				if($token == $tokenDb){
 
 		?>
 				<!DOCTYPE html>
