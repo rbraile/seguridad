@@ -33,7 +33,21 @@ class ComentarioDao {
         return false;
     }
 
-     public function mapComentario($comentario) {
+    public function comentarioByUserDao($id) {
+        $sql_query = "select co.comentario, us.nombre, us.id_usuario, co.id from comentario AS co LEFT JOIN usuario AS us ON co.id_usuario = us.id_usuario WHERE co.id_usuario = $id";
+
+        $pedido = $this->mysqli->query($sql_query);
+        $listaComentarios = array();
+        if($pedido) {
+            while($comentario = mysqli_fetch_array($pedido)) {
+                array_push($listaComentarios, $this->mapComentario($comentario));
+            }
+            return $listaComentarios;
+        }
+        return false;
+    }
+
+    public function mapComentario($comentario) {
         $newComentario = array();
         $newComentario = [
             'id'=> $comentario['id'],

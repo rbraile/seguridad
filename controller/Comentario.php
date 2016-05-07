@@ -22,7 +22,11 @@ class Comentario {
     }
 
     public function AllComentarios() {
-    	return $this->comentarioDao->AllComentariosDao();
+        return $this->comentarioDao->AllComentariosDao();
+    }
+ 
+    public function comentarioByUser($id) {
+    	return $this->comentarioDao->comentarioByUserDao($id);
     }
 }
 
