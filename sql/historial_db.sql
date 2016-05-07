@@ -220,10 +220,3 @@ INSERT INTO `semana` (`fecha_ini`, `fecha_fin`, `current`) VALUES
     ('2016-04-17 00:00:00','2016-04-24 00:00:01',1);
 
 
-
-
-
-
-
-
-

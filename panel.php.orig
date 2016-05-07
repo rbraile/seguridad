@@ -15,20 +15,22 @@
             require_once "controller/Usuario.php"; 
             require_once"credentials/userCredentialsCheck.php"; 
 
-<<<<<<< HEAD
-
             $data = $_SESSION["activeUser"];
 
+<<<<<<< HEAD
             if (checkCredentials('admin', $data))
             { 
-
-=======
-            if (isset($_SESSION["activeUser"])){ 
->>>>>>> 3e8a8ffeccc27f81aea5bc18a5275ad34b5e6952
                         $email = $_SESSION["activeUser"];
                         $user= new Usuario();
                         $activeUser = $user->getUserByEmail($email);
                         $id= $activeUser["id_usuario"];      
+=======
+            if (checkCredentials('admin', $data)) { 
+                $email = $_SESSION["activeUser"];
+                $user= new Usuario();
+                $activeUser = $user->getUserByEmail($email);
+                $id= $activeUser["id_usuario"];      
+>>>>>>> 0c58d9353f3dada1b2f7c6539affc6d489b34a23
                 ?>
         <div class="container">
             <?php include("nav.php");?>

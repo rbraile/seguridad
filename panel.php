@@ -17,12 +17,11 @@
 
             $data = $_SESSION["activeUser"];
 
-            if (checkCredentials('admin', $data))
-            { 
-                        $email = $_SESSION["activeUser"];
-                        $user= new Usuario();
-                        $activeUser = $user->getUserByEmail($email);
-                        $id= $activeUser["id_usuario"];      
+            if (checkCredentials('admin', $data)) { 
+                $email = $_SESSION["activeUser"];
+                $user= new Usuario();
+                $activeUser = $user->getUserByEmail($email);
+                $id= $activeUser["id_usuario"];      
                 ?>
         <div class="container">
             <?php include("nav.php");?>

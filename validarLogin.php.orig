@@ -3,22 +3,31 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-
 require_once "controller/Usuario.php";
 
     if(isset($_POST['login'])) {
-
+<<<<<<< HEAD
 
         if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['email']) && !empty($_POST['email'])){
 
+        $FormPassword= $_POST['password']; 
 
              $FormPassword= $_POST['password']; 
              $formEmail= trim(mb_strtolower($_POST['email']));
              $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
 
              if($emailType){
-                 $user = new Usuario();
                  $resultado = $user->getUserCredential($formEmail,$FormPassword);
+=======
+        if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['email']) && !empty($_POST['email'])){
+            $FormPassword= $_POST['password']; 
+            $formEmail= trim(mb_strtolower($_POST['email']));
+            $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+            
+             if($emailType){
+                $user = new Usuario();
+                $resultado = $user->getUserCredential($formEmail,$FormPassword);
+>>>>>>> 0c58d9353f3dada1b2f7c6539affc6d489b34a23
 
                  if($resultado){
                          $_SESSION["activeUser"]= $formEmail;
@@ -36,22 +45,22 @@ require_once "controller/Usuario.php";
                                          var_dump( $token);
                                          $_SESSION["userLevel"] = "admin";
                                         
-                                          $userToken= new UsuarioDao();
-                                         $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
-                                         if($tokenSucces== 1){
-                                             header("Location: bodyForAdmin.php");
-                                         }else{echo'Error al crear claves de acceso.';
+                                        $userToken= new Usuario();
+                                        $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
+                                        if($tokenSucces== 1){
+                                            header("Location: bodyForAdmin.php");
+                                        }else{echo'Error al crear claves de acceso.';
                                             header('index.php');}
                                          
                                     }else{
                                         $_SESSION["userLevel"] = "user";
-                                         $_SESSION["activeUser"]= $formEmail;                
-                                         $_SESSION["userId"] = $resultado[0]["id_usuario"];
-                                          $userToken= new UsuarioDao();
-                                          $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
-                                          if($tokenSucces==1){
-                                              header("Location: panel.php");
-                                          }else{echo'Error al crear claves de acceso.';header('index.php');} 
+                                        $_SESSION["activeUser"]= $formEmail;                
+                                        $_SESSION["userId"] = $resultado["id"];
+                                        $userToken= new Usuario();
+                                        $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
+                                        if($tokenSucces==1){
+                                            header("Location: panel.php");
+                                        }else{echo'Error al crear claves de acceso.';header('index.php');} 
                                     }
                                       
 
@@ -64,37 +73,6 @@ require_once "controller/Usuario.php";
 
                 echo'Los valores ingresados no son válidos';}
         }
-
-        $formEmail= $_POST['email'];
-        $FormPassword= $_POST['password']; 
-        $user = new Usuario();
-        $resultado = $user->getUserCredential($formEmail,$FormPassword);
-
-        echo 'seession: '.$_SESSION;
-			
-        if($resultado) {
-            $_SESSION["activeUser"]= $formEmail;
-
-			if($resultado['habilitado'] == 1){
-                if($resultado['nombre'] == "admin") {
-                    $_SESSION["userLevel"] = "admin";
-                    header("Location: bodyForAdmin.php");
-
-                } else {
-                    $_SESSION["userLevel"] = "user";
-                    $_SESSION["userId"] = $resultado[0]["id_usuario"];
-                    header("Location: panel.php");
-                }
-			}else{
-				echo '<p>Aún no ha sido habilitado.Intente otro día.</p>';
-					//header("Location: index.php"); "esta comentado para que se vea el texto de respuesta. pero la idea es que redireccione"
-				}
-        } else {
-            echo'<script>alert("No existe registro del usuario ingresado.");</script>';
-            header("Location: index.php");
-				//header("Location: index.php");"esta comentado para que se vea el texto de respuesta. pero la idea es que redireccione"
-        };
-
     }
 			
        

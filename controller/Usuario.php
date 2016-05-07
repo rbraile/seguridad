@@ -52,5 +52,9 @@ class Usuario {
     public function setPassword($id,$password){
         return $this->UsuarioDao->setPasswordDao($id,$password);    
     }
+
+    public function updateUsuarioKey($token,$time,$email) {
+        return $this->UsuarioDao->updateUsuarioKeyDao($token,$time,$email);
+    }
     
 }

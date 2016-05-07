@@ -16,7 +16,7 @@ class UsuarioDao {
     public function getUserCredentialDao($formEmail) {
         $sql_query = "SELECT * FROM usuario WHERE email='$formEmail' AND habilitado = 1";
         $pedido = $this->mysqli->query($sql_query);
-        return mysqli_fetch_array($pedido);
+        return $this->mapUser( mysqli_fetch_array($pedido));
     }
 
     public function updateUsuarioDao($id, $nombre,$email) {
@@ -110,9 +110,10 @@ class UsuarioDao {
         ];
         return $newUsuario;
     }
-    public function updateUsuarioKey($token,$time,$email){
+
+    public function updateUsuarioKeyDao($token,$time,$email){
         $sql_query = "UPDATE usuario SET token='$token' , tokenExpirationTime = '$time' WHERE email='$email'  ";
-         $this->mysqli->query($sql_query); 
+        $this->mysqli->query($sql_query);
         return $this->mysqli->affected_rows;
     }
             
