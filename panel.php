@@ -15,18 +15,13 @@
             require_once "controller/Usuario.php"; 
             require_once"credentials/userCredentialsCheck.php"; 
 
-
             $data = $_SESSION["activeUser"];
 
             if (checkCredentials('admin', $data))
             { 
-
                         $email = $_SESSION["activeUser"];
-
                         $user= new Usuario();
-
                         $activeUser = $user->getUserByEmail($email);
-
                         $id= $activeUser["id_usuario"];      
                 ?>
         <div class="container">

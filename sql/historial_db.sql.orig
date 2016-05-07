@@ -13,15 +13,25 @@ CREATE TABLE `historial_db`.`usuario` ( `id_usuario` INT NOT NULL AUTO_INCREMENT
 ) ENGINE = InnoDB;
 
 INSERT INTO `usuario` (`nombre`, `email`, `habilitado`, `password`) VALUES
+<<<<<<< HEAD
+    ('admin', 'adminHistorial@gmail.com', 1, '@123B'),
+    ('gigoberto', 'gigoloberto@gmail.com', 1, '$111A'),
+    ('juan', 'juantoliva@gmail.com', 1, '1234'),
+    ('auan', 'a@gmail.com', 1, '1234'),
+    ('buan', 'b@gmail.com', 1, '1234'),
+    ('muan', 'm@gmail.com', 1, '1234'),
+    ('cuan', 'c@gmail.com', 1, '1234'),
+    ('pedro', 'p@gmail.com', 1, '1234');
+=======
     ('admin', 'adminHistorial@gmail.com', 1, '$2y$10$EP1rhIYUB2AmucTUK/jNn.JRJylUVZCd2ZFSuNRxtPseCnrIo30b.'),
     ('gigoberto', 'gigoloberto@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
-    ('juan', 'juantoliva@gmail.com', 1, '1234'),
     ('juan', 'j@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('auan', 'a@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('buan', 'b@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('muan', 'm@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('cuan', 'c@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('pedro', 'p@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq');
+>>>>>>> 3e8a8ffeccc27f81aea5bc18a5275ad34b5e6952
 
 CREATE TABLE  `producto` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

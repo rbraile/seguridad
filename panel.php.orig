@@ -12,46 +12,35 @@
     <body>
         <?php
             include('validarLogin.php');
-            require_once "modelo/UsuarioDao.php";  
+            require_once "controller/Usuario.php"; 
+            require_once"credentials/userCredentialsCheck.php"; 
 
 <<<<<<< HEAD
 
+            $data = $_SESSION["activeUser"];
+
+            if (checkCredentials('admin', $data))
+            { 
+
+=======
             if (isset($_SESSION["activeUser"])){ 
-
+>>>>>>> 3e8a8ffeccc27f81aea5bc18a5275ad34b5e6952
                         $email = $_SESSION["activeUser"];
-
-                        $user= new UsuarioDao();
-
-                        $activeUser = $user->getUserForEmail($email);
-
+                        $user= new Usuario();
+                        $activeUser = $user->getUserByEmail($email);
                         $id= $activeUser["id_usuario"];      
                 ?>
-                
-                <div class="container">
-
-                    <nav>
-                        <ul class="nav navbar-nav navbar-right ">
-                            <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nombre Usuario  <span class="caret"></span></a>
-                                  <ul class="dropdown-menu">
-                                        <li><?php echo '<a href="editarDatosPropios.php?ID='.$id.'">Editar Cuenta</a> '?></li>
-                                         <li role="separator" class="divider"></li>
-                                        <li><?php echo "<a href='cerrar_sesion.php'> Salir</a> "?></li>
-                                  </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-=======
-            if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] === 'user' ){ ?>
->>>>>>> 117abdbc63d06917ff2c6b76eaf68d9540d8583e
         <div class="container">
             <?php include("nav.php");?>
             <div class="panel panel-default">
                   <!-- Default panel contents -->
-                  <div class="panel-heading">Productos</div>
+                  <div class="panel-heading"> 
+                        <h3 class="text-center">Productos</h3> 
+                        <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
+
+                  </div>
                    <!-- Table -->
-                   <p>Aquí usted puede editar los precios y visualizarlos haciendo click al botón Editar</p>
+                   
                     <?php 
                         include('controller/Precio.php');
                         include('controller/Semana.php');
@@ -75,7 +64,7 @@
                     <?php
                         include('controller/Producto.php');
                         $producto = New Producto();
-                        $productos = $producto->getProductos();
+                        $productos = $producto->getProductosHabilitados();
 
                         foreach ($productos as $key => $value) {
                             ?>
@@ -84,13 +73,10 @@
                                     <?php print_r($value["id"]); ?>
                                 </td>
                                 <td>
+                                
                                     <?php print_r($value["nombre"]); ?>
                                 </td>
-<<<<<<< HEAD
-                                <td><a href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio btn btn-default"">editar</a></td>
-=======
                                 <td><a class="btn btn-default navbar-btn btn-success" href="editar-precio.php?idProducto=<?php echo $value["id"];?>" class="edit-precio">editar</a></td>
->>>>>>> 117abdbc63d06917ff2c6b76eaf68d9540d8583e
                                <!--  <td>
                                     <form action="guardarPrecio.php" method="POST">
                                         <input type="hidden" name="idProducto" value="<?php echo $value["id"];?>">
