@@ -7,19 +7,13 @@
 	<body>
 		<?php
 			include('validarLogin.php');
-			include('controller/Usuario.php');
 			include('credentials/userCredentialsCheck.php');
 
 			$data = $_SESSION["activeUser"];
 
-			if (checkCredentials('admin', $data))
-			{ 
-				
-
+			if (checkCredentials('admin', $data)) { 
 				$user = new Usuario();
-
 				$pedido= $user->getUserByEmail($data);
-
 				$id= $pedido["id_usuario"];
 		?>
 				<div class="container">

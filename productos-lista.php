@@ -11,7 +11,7 @@
     <body>
         <?php
             include('validarLogin.php');
-            include('controller/Usuario.php');
+            // include('controller/Usuario.php');
             require_once "credentials/userCredentialsCheck.php";
   
             $data= $_SESSION["activeUser"];

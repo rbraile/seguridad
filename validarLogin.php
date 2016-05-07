@@ -28,7 +28,6 @@ require_once "controller/Usuario.php";
                                     $_SESSION['expirationDate'] = $time;
 
                                     if($resultado['nombre'] == "admin") {
-                                         var_dump( $token);
                                          $_SESSION["userLevel"] = "admin";
                                         
                                         $userToken= new Usuario();
