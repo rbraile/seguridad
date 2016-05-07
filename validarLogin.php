@@ -3,21 +3,17 @@ if(!isset($_SESSION)) {
     session_start();
 }
 
-
-require_once "modelo/UsuarioDao.php";
+require_once "controller/Usuario.php";
 
     if(isset($_POST['login'])) {
-
         if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['email']) && !empty($_POST['email'])){
-
-
-             $FormPassword= $_POST['password']; 
-             $formEmail= trim(mb_strtolower($_POST['email']));
-             $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
-
+            $FormPassword= $_POST['password']; 
+            $formEmail= trim(mb_strtolower($_POST['email']));
+            $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+            
              if($emailType){
-                 $user = new UsuarioDao();
-                 $resultado = $user->getUserCredential($formEmail,$FormPassword);
+                $user = new Usuario();
+                $resultado = $user->getUserCredential($formEmail,$FormPassword);
 
                  if($resultado){
                          $_SESSION["activeUser"]= $formEmail;
@@ -35,22 +31,22 @@ require_once "modelo/UsuarioDao.php";
                                          var_dump( $token);
                                          $_SESSION["userLevel"] = "admin";
                                         
-                                          $userToken= new UsuarioDao();
-                                         $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
-                                         if($tokenSucces== 1){
-                                             header("Location: bodyForAdmin.php");
-                                         }else{echo'Error al crear claves de acceso.';
+                                        $userToken= new Usuario();
+                                        $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
+                                        if($tokenSucces== 1){
+                                            header("Location: bodyForAdmin.php");
+                                        }else{echo'Error al crear claves de acceso.';
                                             header('index.php');}
                                          
                                     }else{
                                         $_SESSION["userLevel"] = "user";
-                                         $_SESSION["activeUser"]= $formEmail;                
-                                         $_SESSION["userId"] = $resultado[0]["id_usuario"];
-                                          $userToken= new UsuarioDao();
-                                          $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
-                                          if($tokenSucces==1){
-                                              header("Location: panel.php");
-                                          }else{echo'Error al crear claves de acceso.';header('index.php');} 
+                                        $_SESSION["activeUser"]= $formEmail;                
+                                        $_SESSION["userId"] = $resultado["id"];
+                                        $userToken= new Usuario();
+                                        $tokenSucces= $userToken->updateUsuarioKey($token,$datetime,$formEmail);
+                                        if($tokenSucces==1){
+                                            header("Location: panel.php");
+                                        }else{echo'Error al crear claves de acceso.';header('index.php');} 
                                     }
                                       
 

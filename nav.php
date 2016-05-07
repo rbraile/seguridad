@@ -1,20 +1,16 @@
 <?php
 require_once "controller/Usuario.php";
-	$data = $_SESSION["activeUser"];
-
-                $user = new Usuario();
-
-                $pedido= $user->getUserByEmail($data);
-
-                $id= $pedido["id_usuario"];
+    $data = $_SESSION["activeUser"];
+    $user = new Usuario();
+    $pedido= $user->getUserByEmail($data);
+    $id= $pedido["id_usuario"];
 ?>
 <header>
     <nav>
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="/index.php">Inicio</a></li>
-              
+            <li role="presentation"><a href="/comentario.php?id=<?php echo $_SESSION['userId'];?>">Comentarios</a></li>
                <ul class="nav navbar-nav navbar-right">
-
                		 <li class="dropdown">
 			              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php
 
