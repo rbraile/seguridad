@@ -12,7 +12,7 @@
         <?php
             include('validarLogin.php');
             require_once "validarString.php";
-            include('controller/Usuario.php');
+            // include('controller/Usuario.php');
             require_once "credentials/userCredentialsCheck.php";
   
             $data= $_SESSION["activeUser"];
