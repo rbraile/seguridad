@@ -28,7 +28,17 @@ if(isset($_POST["comentar"])){
                 </tr>
             <?php
                 $comentario = new Comentario();
-                $listaComentario = $comentario->AllComentarios();
+                if(isset($_GET["id"])) {
+                    if($_GET["id"] == $_SESSION['userId']) {
+                        $id = $_GET["id"];
+                        $listaComentario = $comentario->comentarioByUser($id);
+                    } else {
+                        header("Location: panel.php");
+                    }
+                } else {
+                    $listaComentario = $comentario->AllComentarios();
+                }
+
                 if(isset($listaComentario) && $listaComentario){
                     foreach ($listaComentario as $comentario) {
                         echo '<tr>';
