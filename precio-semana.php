@@ -1,7 +1,7 @@
 <?php
     $idSemana = $_GET["idSemana"];
 
-
+    header('X-Frame-Options: DENY');
     if (!is_numeric( $idSemana)){
 
 

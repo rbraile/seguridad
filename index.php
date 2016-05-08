@@ -1,6 +1,9 @@
 <!DOCTYPE>
 <html lang="en">
 	<head>
+        <script type="text/javascript">
+        if(top.location!=this.location) top.location=this.location;
+        </script>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
 		<link href="css/cssApp.css" rel="stylesheet">
@@ -11,7 +14,7 @@
     <body>
 
         <?php
-             header('X-Frame-Options: SAMEORIGIN');
+            header('X-Frame-Options: DENY');
             include('controller/Precio.php');
             include('controller/Semana.php');
         ?>
