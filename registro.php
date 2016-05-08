@@ -19,7 +19,7 @@
 						</div>
 						<div class="form-group">
 							<label>Nombre:</label>
-						    <input type="text" class="form-control"  placeholder="Nombre"  name="nombre" autocomplete="off" required >
+						    <input type="text" class="form-control"  placeholder="Nombre"  name="nombre"  required >
 						</div>
 						<div class="form-group">   
 							 <label>Email:</label>
@@ -27,7 +27,7 @@
 						</div>
 						<div class="form-group">
 						   <label>Password</label>
-						    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
+						    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" autocomplete="off" required>
 						</div>			 
 						<button type="submit" name="registrar" class="btn btn-default">Enviar</button>
 						<p class="help-block">Si ya eres usuario Ingresa <span><a href="index.php">Aquí</a><span></p>
