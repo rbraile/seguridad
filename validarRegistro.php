@@ -1,7 +1,7 @@
 <?php
 
 	
-
+   header('X-Frame-Options: SAMEORIGIN');
 	require_once "modelo/UsuarioDao.php";
 	require_once "validarString.php";
 	

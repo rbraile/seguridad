@@ -8,7 +8,7 @@
 		<title>Historial semanal de precios</title>
 	</head>
 	<body>
-		
+		<?php header('X-Frame-Options: SAMEORIGIN');?>
 		<div class="container">
 			<div class="row centered">
 			  <div class="jumbotron col-md-6">		

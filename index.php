@@ -9,7 +9,9 @@
         <title>Historial semanal de precios</title>
     </head>
     <body>
+
         <?php
+             header('X-Frame-Options: SAMEORIGIN');
             include('controller/Precio.php');
             include('controller/Semana.php');
         ?>
