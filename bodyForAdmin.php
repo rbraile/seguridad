@@ -7,17 +7,13 @@
 	<body>
 		<?php
 			include('validarLogin.php');
-			include('controller/Usuario.php');
+			include('credentials/userCredentialsCheck.php');
 
-			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin")
-			{ 
+			$data = $_SESSION["activeUser"];
 
-				$data = $_SESSION["activeUser"];
-
+			if (checkCredentials('admin', $data)) { 
 				$user = new Usuario();
-
 				$pedido= $user->getUserByEmail($data);
-
 				$id= $pedido["id_usuario"];
 		?>
 				<div class="container">

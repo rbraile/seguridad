@@ -2,9 +2,11 @@
     require_once "modelo/Conexion.php";
     require_once "validarLogin.php";
     require_once "controller/Usuario.php";
+    require_once"credentials/userCredentialsCheck.php";
 
-if(isset($_GET['ID'])){
-    $id = $_GET['ID'];
+if(isset($_GET['current'])){
+    $value = $_GET['current'];
+    $id= base64_decode($value);
     $user= new UsuarioDao();
     $wasDeleted= $user->setFielEnable($id);
 
@@ -27,8 +29,9 @@ if(isset($_GET['ID'])){
 	</head>
 	<body>
 		<?php			
-
-			if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){ 
+			
+			$data=$_SESSION["activeUser"];
+			if (checkCredentials('admin',$data)){ 
                 $user = new Usuario();
                 $listaUsuarios = $user->getUsersDeletables();
 				?>
@@ -59,7 +62,7 @@ if(isset($_GET['ID'])){
 							echo'<td> '.$usuario["nombre"].'  </td>';
 							echo'<td> '.$usuario["email"].'  </td>';
 							echo'<td> '.$usuario["habilitado"].'  </td>';
-							echo'<td>' . '<a  class="btn btn-default"  name="darBaja" href="listarUsuariosBaja.php?ID='.$usuario["id"].'">Eliminar</a>'.'</td>';
+							echo'<td>' . '<a  class="btn btn-default" name="darBaja" href="listarUsuariosBaja.php?current='.base64_encode($usuario["id"]).'">Eliminar</a>'.'</td>';
 							echo'</tr>';	
 						}
 					}

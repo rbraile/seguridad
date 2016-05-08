@@ -13,22 +13,28 @@
 			include('validarLogin.php');
 			require_once "controller/Usuario.php";
 			require_once "validarString.php";
+			require_once"credentials/userCredentialsCheck.php";
 		
 			//include('altaUsuario.php');
 
-			if (isset($_SESSION["activeUser"]))
+			$data = $_SESSION["activeUser"];
 
+			if (checkCredentials('user',$data))
 			{ 
 
-				$idUser= $_GET["ID"];
-
+				$isCurrent=$_GET["is"]; 
+				$idUser= base64_decode($isCurrent);
+				$token= $_SESSION["token"];
 				$user= new Usuario();
 
 				$activeUser= $user->getUserById($idUser);
 
+				$tokenDb= $activeUser["token"];
 				$nombre= $activeUser["nombre"];
 				$email=$activeUser["email"];
 				$password= $activeUser["password"];
+
+				if($token == $tokenDb){
 
 		?>
 				<!DOCTYPE html>
@@ -72,28 +78,35 @@
 		
 		<?php
 
-
+	}else{echo'Epa epa!!!, Los datos que nos mandas no son tuyos che.';}
 				if(isset($_POST["editar"])){
 
-					$formNombre=trim(mb_strtolower($_POST['nombre']));
-					$formEmail= trim(mb_strtolower($_POST['email']));
+					if(checkCredentials('user',$data)){
 
-					$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
-					$nombreType= stringValido($formNombre);
+							$formNombre=trim(mb_strtolower($_POST['nombre']));
+							$formEmail= trim(mb_strtolower($_POST['email']));
 
-					$formPassword= $_POST["password"];
-					$user2= new Usuario();
-					if($emailType && $nombreType){
-						$isSet= $user2->updateSelfUsuario($idUser,$formNombre,$formEmail,$formPassword);
-						$_SESSION["activeUser"]= $formEmail;
+							$emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+							$nombreType= stringValido($formNombre);
+
+							$formPassword= $_POST["password"];
+							$user2= new Usuario();
+							if($emailType && $nombreType){
+								$isSet= $user2->updateSelfUsuario($idUser,$formNombre,$formEmail,$formPassword);
+								$_SESSION["activeUser"]= $formEmail;
+							}else{
+								echo'Valores ingresados inválidos';
+							}
+							if($isSet == 1){
+
+								echo "<script>window.location='panel.php';</script>";
+
+							}
+
 					}else{
-						echo'Valores ingresados inválidos';
+						echo "<script>window.location='index.php';</script>";
 					}
-					if($isSet == 1){
 
-						echo "<script>window.location='panel.php';</script>";
-
-					}
 
 				}
 				 echo '<a  class="btn  btn-primary"   name="atras" href="panel.php">Atrás</a>';

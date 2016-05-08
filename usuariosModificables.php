@@ -1,6 +1,10 @@
 <?php
     include('validarLogin.php');
-    if (isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin") { 
+    require_once "controller/Usuario.php";
+    require_once "credentials/userCredentialsCheck.php";
+  
+    $data= $_SESSION["activeUser"];
+if (checkCredentials('admin',$data)){
 ?>
 <!DOCTYPE>
 <html lang="en">
@@ -8,7 +12,8 @@
     <body>
 
         <?php
-            include('controller/Usuario.php');
+          
+
             $data = $_SESSION["activeUser"];
             $user = new Usuario();
             $pedido= $user->getUserByEmail($data);
@@ -18,9 +23,10 @@
                 <?php include("headerAdmin.php");?>
             </div>
            <?php if(isset($_POST['editar'])){
+
                 if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['email']) && !empty($_POST['email'])){
                     require_once "validarString.php";
-                    require_once "controller/Usuario.php";
+                   
                     $formNombre= trim(mb_strtolower($_POST['nombre'])); 
                     $formEmail= trim(mb_strtolower($_POST['email'])); 
                     $id= $_POST['id']; 
@@ -45,6 +51,7 @@
                             echo "<script>window.location='usuariosModificables.php';</script>";
                         } else{
                             echo('Error al intentar cambiar los datos');
+                            echo '<a  class="btn btn-default"  name="atras" href="usuariosModificables.php">Atrás</a>';
                         }
                     }
                 }
@@ -58,7 +65,7 @@
                        <!-- Table -->
                        <table class="table">
                         <tr>
-                            <td>id</td>
+                           
                             <td>nombre</td>
                             <td>email</td>
                             <td>habilitado</td>
@@ -70,7 +77,7 @@
                                 $listaUsuarios = $user->getUsersDeletables();
                                 foreach ($listaUsuarios as $usuario) {
                                     echo'<tr>';
-                                    echo'<td> '.$usuario["id"].' </td>';
+                                 
                                     echo'<td> '.$usuario["nombre"].'  </td>';
                                     echo'<td> '.$usuario["email"].'  </td>';
                                     echo'<td> '.$usuario["habilitado"].'  </td>';

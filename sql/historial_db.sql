@@ -5,6 +5,8 @@ USE historial_db;
 CREATE TABLE `historial_db`.`usuario` ( `id_usuario` INT NOT NULL AUTO_INCREMENT , 
     `nombre` VARCHAR(15) NOT NULL , 
     `email` VARCHAR(50) NOT NULL ,
+    `token` VARCHAR(50),
+    `tokenExpirationTime` DATETIME,
     `habilitado` BOOLEAN NOT NULL ,
     `password` VARCHAR(100) NOT NULL , PRIMARY KEY (`id_usuario`), 
      UNIQUE `email` (`email`(50))
@@ -13,6 +15,7 @@ CREATE TABLE `historial_db`.`usuario` ( `id_usuario` INT NOT NULL AUTO_INCREMENT
 INSERT INTO `usuario` (`nombre`, `email`, `habilitado`, `password`) VALUES
     ('admin', 'adminHistorial@gmail.com', 1, '$2y$10$EP1rhIYUB2AmucTUK/jNn.JRJylUVZCd2ZFSuNRxtPseCnrIo30b.'),
     ('gigoberto', 'gigoloberto@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
+    ('juan', 'juantoliva@gmail.com', 1, '1234'),
     ('juan', 'j@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('auan', 'a@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
     ('buan', 'b@gmail.com', 1, '$2y$10$mLRE/CvmsaXMlkEC.ewdFO2eNMKZcHGQnNpHr7IphkzHyL8L2ZyCq'),
@@ -215,12 +218,5 @@ INSERT INTO `semana` (`fecha_ini`, `fecha_fin`, `current`) VALUES
     ('2016-03-27 00:00:00','2016-04-03 00:00:01',0),
     ('2016-04-03 00:00:00','2016-04-10 00:00:01',0),
     ('2016-04-17 00:00:00','2016-04-24 00:00:01',1);
-
-
-
-
-
-
-
 
 

@@ -36,7 +36,7 @@
 
               echo''.$data.'';?> <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                    <li><?php echo '<a href="editarContrasenia.php?ID='.$id.'">Editar Contraseña</a> '?></li>
+                    <li><?php echo '<a href="editarContrasenia.php?is='.base64_encode($id).'">Editar Contraseña</a> '?></li>
                     <li role="separator" class="divider"></li>
                     <li><?php echo "<a href='cerrar_sesion.php'> Salir</a> "?></li>
               </ul>

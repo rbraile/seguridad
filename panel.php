@@ -12,13 +12,16 @@
     <body>
         <?php
             include('validarLogin.php');
-            require_once "controller/Usuario.php";  
+            require_once "controller/Usuario.php"; 
+            require_once"credentials/userCredentialsCheck.php"; 
 
-            if (isset($_SESSION["activeUser"])){ 
-                        $email = $_SESSION["activeUser"];
-                        $user= new Usuario();
-                        $activeUser = $user->getUserByEmail($email);
-                        $id= $activeUser["id_usuario"];      
+            $data = $_SESSION["activeUser"];
+
+            if (checkCredentials('admin', $data)) { 
+                $email = $_SESSION["activeUser"];
+                $user= new Usuario();
+                $activeUser = $user->getUserByEmail($email);
+                $id= $activeUser["id_usuario"];      
                 ?>
         <div class="container">
             <?php include("nav.php");?>

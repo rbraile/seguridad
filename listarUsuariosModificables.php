@@ -1,8 +1,10 @@
 <?php
 
 require_once "validarLogin.php";
+require_once "credentials/userCredentialsCheck.php";
 
-if( isset($_SESSION["userLevel"]) && $_SESSION["userLevel"] == "admin"){
+$data= $_SESSION["activeUser"];
+if (checkCredentials('admin',$data)){
 		$user = new UsuarioDao();
 		$pedido = $user->getUsersDeletables();
 		$usuario = mysqli_fetch_array($pedido);
