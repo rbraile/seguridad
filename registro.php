@@ -19,7 +19,7 @@
 						</div>
 						<div class="form-group">
 							<label>Nombre:</label>
-						    <input type="text" class="form-control"  placeholder="Nombre"  name="nombre" required>
+						    <input type="text" class="form-control"  placeholder="Nombre"  name="nombre" autocomplete="off" required >
 						</div>
 						<div class="form-group">   
 							 <label>Email:</label>

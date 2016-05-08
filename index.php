@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" name="password"  placeholder="Contraseña" required>
+                            <input type="password" class="form-control" name="password"  placeholder="Contraseña" autocomplete="off"  required >
                         </div>                       
                         <button type="submit" name="login" class="btn btn-default">Aceptar</button>
                         <p class="help-block">Si aún no eres usuario Ingresa <span><a href="registro.php">Aquí</a><span></p>
