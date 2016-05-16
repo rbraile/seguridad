@@ -6,8 +6,20 @@ if(!isset($_SESSION)) {
 require_once "controller/Usuario.php";
 
     if(isset($_POST['login'])) {
+<<<<<<< HEAD
+
         if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['email']) && !empty($_POST['email'])){
+
         $FormPassword= $_POST['password']; 
+
+             $FormPassword= $_POST['password']; 
+             $formEmail= trim(mb_strtolower($_POST['email']));
+             $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
+
+             if($emailType){
+                 $resultado = $user->getUserCredential($formEmail,$FormPassword);
+=======
+        if(isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['email']) && !empty($_POST['email'])){
             $FormPassword= $_POST['password']; 
             $formEmail= trim(mb_strtolower($_POST['email']));
             $emailType= filter_var($formEmail, FILTER_VALIDATE_EMAIL);
@@ -15,6 +27,7 @@ require_once "controller/Usuario.php";
              if($emailType){
                 $user = new Usuario();
                 $resultado = $user->getUserCredential($formEmail,$FormPassword);
+>>>>>>> 0c58d9353f3dada1b2f7c6539affc6d489b34a23
 
                  if($resultado){
                          $_SESSION["activeUser"]= $formEmail;
@@ -29,6 +42,7 @@ require_once "controller/Usuario.php";
                                     $_SESSION['expirationDate'] = $time;
 
                                     if($resultado['nombre'] == "admin") {
+                                         var_dump( $token);
                                          $_SESSION["userLevel"] = "admin";
                                         
                                         $userToken= new Usuario();

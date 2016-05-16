@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require_once("controller/Comentario.php");
+header('X-Frame-Options: SAMEORIGIN');
 
 if(isset($_POST["comentar"])){
     $userId = 0;

@@ -28,3 +28,14 @@
 .show {
     display: block;
 }
+p{
+
+  margin: 5px;
+}
+h1{
+  text-align: center;
+}
+.cometarioLabel{
+  margin: 5px;
+  font-style: italic;
+}

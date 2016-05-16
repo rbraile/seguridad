@@ -1,11 +1,18 @@
 <?php
     $idSemana = $_GET["idSemana"];
 
+    header('X-Frame-Options: DENY');
+    if (!is_numeric( $idSemana)){
+
+
+        echo "<script>window.location='index.php';</script>";
+
+    }
+
     include('controller/Precio.php');
     $precio = new Precio();
     $precios = $precio->getPreciosHistorial($idSemana);   
 ?>
-<h2>hola</h2>
     <table class="table">
         <?php if($precios != 0): ?>
             <tr>
