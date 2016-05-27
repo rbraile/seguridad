@@ -1,6 +1,3 @@
-<IfModule mod_rewrite.c>
-    Options -Indexes
-</IfModule>
 <IfModule php5_module>
     php_flag session.cookie_httponly on
     php_flag session.cookie_secure on

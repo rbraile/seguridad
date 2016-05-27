@@ -22,17 +22,17 @@
 				  </div>
 		</div>
 
-		<form action= "filtro.php" method="post" class="form-horizontal" autocomplete="off">
+		<form action= "<?php echo $_SERVER['PHP_SELF']?>" method="post" class="form-horizontal" autocomplete="off">
 			<div class="form-group">
 		      <label class="control-label col-sm-2" for="email">email usuario</label>
 		      <div class="col-sm-2">
-		       <input type="text" id="campo" name="email" value="" class="input"/>
+		       <input autocomplete="off" type="text" id="campo" name="email" value="" class="input"/>
 		      </div>
 			</div>
 			<div class="form-group">
 		      <label class="control-label col-sm-2" for="email">Contrase&ntilde;a</label>
 		      <div class="col-sm-2">
-				<input type="password" name="contrasenia" value="" class="input"/>
+				<input autocomplete="off" type="password" name="contrasenia" value="" class="input"/>
 		      </div>
 			</div>		
 			<div class="row">
